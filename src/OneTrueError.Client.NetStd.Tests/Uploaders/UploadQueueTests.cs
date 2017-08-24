@@ -12,8 +12,7 @@ namespace OneTrueError.Client.NetStd.Tests.Uploaders
         public void should_invoke_Background_job()
         {
             var uploadIsInvoked = false;
-            var sut = new UploadQueue<string>(x => uploadIsInvoked = true);
-            sut.ActivateSync = true;
+            var sut = new UploadQueue<string>(x => uploadIsInvoked = true) {ActivateSync = true};
 
             sut.Enqueue("hello");
 
@@ -27,8 +26,7 @@ namespace OneTrueError.Client.NetStd.Tests.Uploaders
         {
             var uploadIsInvoked = false;
             var directly = false;
-            var sut = new UploadQueue<string>(x => uploadIsInvoked = true);
-            sut.ActivateSync = true;
+            var sut = new UploadQueue<string>(x => uploadIsInvoked = true) {ActivateSync = true};
 
             sut.EnqueueIfNotEmpty("hello", () => directly = true);
 
@@ -66,9 +64,11 @@ namespace OneTrueError.Client.NetStd.Tests.Uploaders
         public void should_throw_new_entries_if_queue_is_full()
         {
             var failed = false;
-            var sut = new UploadQueue<string>(x => Task.Delay(1000).Wait());
-            sut.MaxQueueSize = 1;
-            sut.ActivateSync = true;
+            var sut = new UploadQueue<string>(x => Task.Delay(1000).Wait())
+            {
+                MaxQueueSize = 1,
+                ActivateSync = true
+            };
             sut.Enqueue("hello");
 
             sut.UploadFailed += (o, e) => failed = true;
@@ -85,9 +85,11 @@ namespace OneTrueError.Client.NetStd.Tests.Uploaders
             {
                 attempts++;
                 throw new NotSupportedException("we need more power");
-            });
-            sut.ActivateSync = true;
-            sut.RetryInterval = TimeSpan.FromMilliseconds(10);
+            })
+            {
+                ActivateSync = true,
+                RetryInterval = TimeSpan.FromMilliseconds(10)
+            };
 
             sut.Enqueue("hello");
 
@@ -103,10 +105,12 @@ namespace OneTrueError.Client.NetStd.Tests.Uploaders
             {
                 attempts++;
                 throw new NotSupportedException("we need more power");
-            });
-            sut.ActivateSync = true;
-            sut.RetryInterval = TimeSpan.FromMilliseconds(10);
-            sut.MaxAttempts = 3;
+            })
+            {
+                ActivateSync = true,
+                RetryInterval = TimeSpan.FromMilliseconds(10),
+                MaxAttempts = 3
+            };
             bool failed = false;
             sut.UploadFailed += (sender, args) => failed = true;
 

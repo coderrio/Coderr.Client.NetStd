@@ -18,11 +18,10 @@ namespace OneTrueError.Client.Reporters
         /// </summary>
         /// <param name="reporter">The reporter.</param>
         /// <param name="exception">The exception.</param>
+        /// <exception cref="ArgumentNullException">exception</exception>
         public ErrorReporterContext(object reporter, Exception exception)
         {
-            if (exception == null) throw new ArgumentNullException("exception");
-
-            Exception = exception;
+            Exception = exception ?? throw new ArgumentNullException(nameof(exception));
             Reporter = reporter;
             ContextCollections = new List<ContextCollectionDTO>();
         }

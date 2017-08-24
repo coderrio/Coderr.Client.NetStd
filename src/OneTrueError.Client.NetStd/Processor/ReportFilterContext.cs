@@ -17,9 +17,7 @@ namespace OneTrueError.Client.Processor
         /// <exception cref="System.ArgumentNullException">report</exception>
         public ReportFilterContext(ErrorReportDTO report)
         {
-            if (report == null) throw new ArgumentNullException("report");
-
-            Report = report;
+            Report = report ?? throw new ArgumentNullException("report");
             CanSubmitReport = true;
         }
 

@@ -7,6 +7,9 @@ using OneTrueError.Client.Reporters;
 
 namespace OneTrueError.Client
 {
+    /// <summary>
+    /// Starting point for using the OneTrueError client.
+    /// </summary>
     public class OneTrue
     {
         private static readonly ExceptionProcessor _exceptionProcessor;
@@ -165,6 +168,11 @@ namespace OneTrueError.Client
             }
         }
         
+        /// <summary>
+        /// Report an exception using a custom context
+        /// </summary>
+        /// <param name="reporterContext">Context used to be able to collect context information</param>
+        /// <param name="errorContextModel">Extra context collection(s).</param>
         public static void Report(IErrorReporterContext reporterContext, object errorContextModel)
         {
             if (reporterContext == null) throw new ArgumentNullException(nameof(reporterContext));
@@ -283,6 +291,45 @@ namespace OneTrueError.Client
             }
         }
 
+        /// <summary>
+        ///     Report an exception directly.
+        /// </summary>
+        /// <param name="errorReporterContext">custom reporting context, will be used to be able to pick up context collections</param>
+        /// <returns>Unique identifier for this report (generated using <see cref="ReportIdGenerator" />)</returns>
+        /// <exception cref="System.ArgumentNullException">exception</exception>
+        /// <remarks>
+        ///     <para>
+        ///         Context information will be collected and included in the error report. You can configure the attached
+        ///         information
+        ///         by
+        ///         using <c>OneTrue.Configuration.ContextProviders</c>
+        ///     </para>
+        ///     <para>
+        ///         All library exceptions are directed to the <c>OneTrue.ReportingFailed</c> event.
+        ///         Subscribe on that event if you have trouble with reporting exceptions.
+        ///     </para>
+        /// </remarks>
+        /// <example>
+        ///     <code>
+        /// public ActionResult Activate(UserViewModel model)
+        /// {
+        /// 	if (!ModelState.IsValid)
+        /// 		return View(model);
+        /// 		
+        /// 	try
+        /// 	{
+        /// 		var user = _repos.GetUser(model.Id);
+        /// 		user.Activate(model.ActivationCode);
+        /// 		_repos.Save(user);
+        /// 		return RedirectToAction("Welcome");
+        /// 	}
+        /// 	catch (Exception exception)
+        /// 	{
+        /// 		OneTrue.Report(exception, model);
+        /// 	}
+        /// }
+        /// </code>
+        /// </example>
         public static void Report(IErrorReporterContext errorReporterContext)
         {
             if (errorReporterContext == null) throw new ArgumentNullException(nameof(errorReporterContext));

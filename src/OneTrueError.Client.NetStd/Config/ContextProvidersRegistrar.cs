@@ -39,7 +39,7 @@ namespace OneTrueError.Client.Config
         }
 
         /// <summary>
-        ///     Add a new provider
+        ///     Add a new provider.
         /// </summary>
         /// <param name="provider">Provider to add</param>
         /// <exception cref="System.ArgumentNullException">provider</exception>

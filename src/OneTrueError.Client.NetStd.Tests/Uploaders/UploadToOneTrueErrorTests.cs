@@ -61,7 +61,6 @@ namespace OneTrueError.Client.NetStd.Tests.Uploaders
         public void should_queue_reports_when_specified()
         {
             var report = Substitute.For<ErrorReportDTO>();
-            HttpRequestMessage msg = null;
             var uri = new Uri("http://localhost");
             _config.QueueReportsAccessor = () => true;
 
@@ -75,7 +74,6 @@ namespace OneTrueError.Client.NetStd.Tests.Uploaders
         public void should_queue_feedback_when_specified()
         {
             var dto = Substitute.For<FeedbackDTO>();
-            HttpRequestMessage msg = null;
             var uri = new Uri("http://localhost");
             _config.QueueReportsAccessor = () => true;
 
@@ -90,7 +88,6 @@ namespace OneTrueError.Client.NetStd.Tests.Uploaders
         {
             _config.ThrowExceptionsAccessor = () => true;
             var dto = Substitute.For<FeedbackDTO>();
-            HttpRequestMessage msg = null;
             var uri = new Uri("http://localhost");
             _config.UploadFunc = message => throw new InvalidOperationException("err");
 
@@ -106,12 +103,9 @@ namespace OneTrueError.Client.NetStd.Tests.Uploaders
         {
             _config.QueueReportsAccessor = () => true;
             var dto = Substitute.For<FeedbackDTO>();
-            HttpRequestMessage msg = null;
             var uri = new Uri("http://localhost");
-            bool invoked = false;
             _config.UploadFunc = message =>
             {
-                invoked = true;
                 throw new InvalidOperationException("err");
             };
 

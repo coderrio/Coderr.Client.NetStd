@@ -22,7 +22,11 @@ namespace OneTrueError.Client.Processor
     /// <seealso cref="ShortGuid" />
     public class ReportIdGenerator
     {
+        /// <summary>
+        /// Used to configure the generator that this client will use
+        /// </summary>
         public static ReportIdGenerator Instance = new ReportIdGenerator();
+
         private Func<Exception, string> _generator = report => ShortGuid.Encode(Guid.NewGuid());
 
         /// <summary>
@@ -42,9 +46,7 @@ namespace OneTrueError.Client.Processor
         /// <exception cref="System.ArgumentNullException">generator</exception>
         public void AssignImp(Func<Exception, string> generator)
         {
-            if (generator == null) throw new ArgumentNullException(nameof(generator));
-
-            _generator = generator;
+            _generator = generator ?? throw new ArgumentNullException(nameof(generator));
         }
 
         /// <summary>

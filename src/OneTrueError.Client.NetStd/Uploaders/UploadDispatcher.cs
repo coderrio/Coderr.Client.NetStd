@@ -34,9 +34,7 @@ namespace OneTrueError.Client.Uploaders
         /// <exception cref="ArgumentNullException">configuration</exception>
         public UploadDispatcher(OneTrueConfiguration configuration)
         {
-            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-
-            _configuration = configuration;
+            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
         
 

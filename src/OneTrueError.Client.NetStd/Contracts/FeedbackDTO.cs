@@ -1,4 +1,6 @@
-﻿namespace OneTrueError.Client.Contracts
+﻿using OneTrueError.Client.Processor;
+
+namespace OneTrueError.Client.Contracts
 {
     /// <summary>
     ///     To be able to write feedback after the actual error have been sent.

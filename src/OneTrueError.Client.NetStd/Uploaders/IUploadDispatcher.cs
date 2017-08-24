@@ -18,11 +18,6 @@ namespace OneTrueError.Client.Uploaders
     public interface IUploadDispatcher
     {
         /// <summary>
-        ///     Max number of items that may wait in queue to get uploaded.
-        /// </summary>
-        //int MaxQueueSize { get; set; }
-
-        /// <summary>
         ///     Register an uploader.
         /// </summary>
         /// <param name="uploader">uploader</param>

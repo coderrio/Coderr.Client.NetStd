@@ -2,6 +2,10 @@ using System;
 
 namespace OneTrueError.Client.Uploaders
 {
+    /// <summary>
+    /// Queue used to upload reports to an analyser.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IUploadQueue<in T> where T : class
     {
         ///// <summary>

@@ -33,9 +33,7 @@ namespace OneTrueError.Client.Config
         /// <exception cref="ArgumentNullException">uploadDispatcher</exception>
         public OneTrueConfiguration(IUploadDispatcher uploadDispatcher)
         {
-            if (uploadDispatcher == null) throw new ArgumentNullException(nameof(uploadDispatcher));
-
-            Uploaders = uploadDispatcher;
+            Uploaders = uploadDispatcher ?? throw new ArgumentNullException(nameof(uploadDispatcher));
             _userInteraction.AskUserForDetails = true;
             ThrowExceptions = true;
             MaxNumberOfPropertiesPerCollection = 100;
@@ -93,11 +91,6 @@ namespace OneTrueError.Client.Config
         /// <remarks>
         ///     <para>
         ///         Default is <c>true</c>, turn of before going to production.
-        ///     </para>
-        ///     <para>
-        ///         You can use the <see cref="UploadDispatcher.UploadFailed" /> event to get aware of errors when this flag is set
-        ///         to
-        ///         <c>true</c>.
         ///     </para>
         ///     <para>
         ///         This option is not used when <seealso cref="QueueReports" /> is <c>true</c>.

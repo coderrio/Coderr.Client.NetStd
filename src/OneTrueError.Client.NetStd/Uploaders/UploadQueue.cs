@@ -26,10 +26,10 @@ namespace OneTrueError.Client.Uploaders
         ///     Action to invoke for the DTO that should be uploaded. Thrown exceptions are used to indicate
         ///     that a retry should be made.
         /// </param>
+        /// <exception cref="ArgumentNullException">uploadAction</exception>
         public UploadQueue(Action<T> uploadAction)
         {
-            if (uploadAction == null) throw new ArgumentNullException("uploadAction");
-            _uploadAction = uploadAction;
+            _uploadAction = uploadAction ?? throw new ArgumentNullException("uploadAction");
             MaxQueueSize = 10;
             MaxAttempts = 3;
             RetryInterval = TimeSpan.FromSeconds(5);
@@ -94,8 +94,7 @@ namespace OneTrueError.Client.Uploaders
             if (item == null) throw new ArgumentNullException("item");
             if (_queue.Count >= MaxQueueSize)
             {
-                if (UploadFailed != null)
-                    UploadFailed(this, new UploadReportFailedEventArgs(new Exception("Too large queue"), item));
+                UploadFailed?.Invoke(this, new UploadReportFailedEventArgs(new Exception("Too large queue"), item));
                 return;
             }
 
@@ -166,8 +165,7 @@ namespace OneTrueError.Client.Uploaders
                         continue;
                     }
 
-                    T item;
-                    if (!_queue.TryPeek(out item))
+                    if (!_queue.TryPeek(out T item))
                         break;
 
 
@@ -180,11 +178,9 @@ namespace OneTrueError.Client.Uploaders
                     _attemptNumber++;
                     if (_attemptNumber >= MaxAttempts)
                     {
-                        T failedItem;
-                        _queue.TryDequeue(out failedItem);
+                        _queue.TryDequeue(out T failedItem);
                         _attemptNumber = 0;
-                        if (UploadFailed != null)
-                            UploadFailed(this, new UploadReportFailedEventArgs(ex, failedItem));
+                        UploadFailed?.Invoke(this, new UploadReportFailedEventArgs(ex, failedItem));
                     }
                     else
                     {

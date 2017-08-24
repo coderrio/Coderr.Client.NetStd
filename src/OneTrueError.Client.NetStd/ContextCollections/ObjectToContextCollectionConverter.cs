@@ -134,6 +134,7 @@ namespace OneTrueError.Client.ContextCollections
         ///     <c>"User.FirstName"</c>. Leave empty for no prefix.
         /// </param>
         /// <param name="instance">Object to get a string representation for</param>
+        /// <param name="destination">Dictionary that items will be added to.</param>
         /// <returns>"null" if the object is null, otherwise dictionary</returns>
         /// <remarks>
         ///     Look at the class doc for an example.
@@ -158,13 +159,12 @@ namespace OneTrueError.Client.ContextCollections
                         .Invoke(this, new[] {prefix, instance, destination, path});
                     return;
                 }
-                if (instance is IDictionary<string, string>)
+                if (instance is IDictionary<string, string> dictionary)
                 {
-                    var dict = (IDictionary<string, string>) instance;
                     if (string.IsNullOrEmpty(prefix))
                         return;
 
-                    foreach (var kvp in dict)
+                    foreach (var kvp in dictionary)
                         destination.Add($"{prefix}.{kvp.Key}", kvp.Value);
                 }
 
@@ -219,10 +219,10 @@ namespace OneTrueError.Client.ContextCollections
         ///     Properties that should be ignored when the context collection is being built.
         /// </summary>
         /// <param name="properties">Case sensitive names</param>
+        /// <exception cref="ArgumentNullException">properties</exception>
         public void Ignore(params string[] properties)
         {
-            if (properties == null) throw new ArgumentNullException("properties");
-            _propertiesToIgnore = properties;
+            _propertiesToIgnore = properties ?? throw new ArgumentNullException(nameof(properties));
         }
 
         /// <summary>
@@ -294,20 +294,17 @@ namespace OneTrueError.Client.ContextCollections
                         destination.Add(prefix + propertyName, "null");
                         continue;
                     }
-                    var enc = value as Encoding;
-                    if (enc != null)
+                    if (value is Encoding enc)
                     {
                         destination.Add(prefix + propertyName, enc.EncodingName);
                         continue;
                     }
-                    var v1 = value as DateTimeFormatInfo;
-                    if (v1 != null)
+                    if (value is DateTimeFormatInfo v1)
                     {
                         destination.Add(prefix + propertyName, v1.FullDateTimePattern);
                         continue;
                     }
-                    var v2 = value as CultureInfo;
-                    if (v2 != null)
+                    if (value is CultureInfo v2)
                     {
                         destination.Add(prefix + propertyName, "Culture[\"" + v2.Name + "\"]");
                         continue;
@@ -405,20 +402,17 @@ namespace OneTrueError.Client.ContextCollections
                 return;
             }
 
-            var enc = source as Encoding;
-            if (enc != null)
+            if (source is Encoding enc)
             {
                 destination.Add(propertyName, enc.EncodingName);
                 return;
             }
-            var v1 = source as DateTimeFormatInfo;
-            if (v1 != null)
+            if (source is DateTimeFormatInfo v1)
             {
                 destination.Add(propertyName, v1.FullDateTimePattern);
                 return;
             }
-            var v2 = source as CultureInfo;
-            if (v2 != null)
+            if (source is CultureInfo v2)
             {
                 destination.Add(propertyName, $"Culture[\"{v2.Name}\"]");
                 return;

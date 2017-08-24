@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using FluentAssertions;
 using FluentAssertions.Execution;
-using Microsoft.Extensions.DependencyModel;
 using OneTrueError.Client.ContextCollections;
 using OneTrueError.Client.NetStd.Tests.TestObjects;
 using Xunit;
@@ -14,6 +14,12 @@ namespace OneTrueError.Client.NetStd.Tests.ContextCollections
 {
     public class ObjectToContextCollectionConverterTests
     {
+        public ObjectToContextCollectionConverterTests()
+        {
+            CultureInfo.CurrentCulture = new CultureInfo("sv-se");
+            CultureInfo.CurrentUICulture = new CultureInfo("sv-se");
+        }
+
         #region Test helper methods
         public void TestOne(Action x)
         {
@@ -60,8 +66,7 @@ namespace OneTrueError.Client.NetStd.Tests.ContextCollections
                 Amount = 20000,
                 Expires = DateTime.UtcNow.AddMinutes(5)
             };
-            var dict = new Dictionary<string, object>();
-            dict["DemoKey"] = item;
+            var dict = new Dictionary<string, object> {["DemoKey"] = item};
 
 
             var sut = new ObjectToContextCollectionConverter();
