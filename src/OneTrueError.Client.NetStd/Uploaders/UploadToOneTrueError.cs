@@ -112,10 +112,6 @@ namespace OneTrueError.Client.Uploaders
                         new IncludeNonPublicMembersContractResolver()
                 });
             var jsonBytes = Encoding.UTF8.GetBytes(reportJson);
-            var version = GetType().GetTypeInfo().Assembly.GetName().Version.ToString(2);
-            var hashAlgo = new HMACSHA256(Encoding.UTF8.GetBytes(_sharedSecret));
-            var hash = hashAlgo.ComputeHash(jsonBytes);
-            var signature = Convert.ToBase64String(hash);
 
             var ms = new MemoryStream();
             using (var gzip = new GZipStream(ms, CompressionMode.Compress, true))
@@ -124,10 +120,27 @@ namespace OneTrueError.Client.Uploaders
             }
             ms.Position = 0;
 
+            byte[] hash;
+            var hashAlgo = new HMACSHA256(Encoding.UTF8.GetBytes(_sharedSecret));
+            if (ms.TryGetBuffer(out ArraySegment<byte> buffer))
+                hash = hashAlgo.ComputeHash(buffer.Array, buffer.Offset, buffer.Count);
+            else
+            {
+                byte[] buf2 = new byte[ms.Length];
+                ms.Read(buf2, 0, buf2.Length);
+                hash = hashAlgo.ComputeHash(buffer.Array, buffer.Offset, buffer.Count);
+            }
+
+            var signature = Convert.ToBase64String(hash);
+
             var content = new StreamContent(ms);
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            content.Headers.ContentEncoding.Add("gzip");
-            uri = uri + "?sig=" + signature + "&v=" + version;
+
+            // this is version 2. Need to push that on the server side first
+            // and we also need to calc the signature on the JSON and not the gzipped content
+            // content.Headers.ContentEncoding.Add("gzip");
+
+            uri = uri + "?sig=" + signature + "&v=1";
             return new HttpRequestMessage(HttpMethod.Post, uri) {Content = content};
         }
 

@@ -99,7 +99,7 @@ namespace OneTrueError.Client.NetStd.Tests.Uploaders
         }
 
         [Fact]
-        public void show_always_throw_when_queing_is_configured_to_allow_retries()
+        public void should_always_throw_when_queing_is_configured_to_allow_retries()
         {
             _config.QueueReportsAccessor = () => true;
             var dto = Substitute.For<FeedbackDTO>();

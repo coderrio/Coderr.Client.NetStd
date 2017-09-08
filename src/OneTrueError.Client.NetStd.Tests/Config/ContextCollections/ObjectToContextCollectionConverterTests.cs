@@ -10,7 +10,7 @@ using OneTrueError.Client.ContextCollections;
 using OneTrueError.Client.NetStd.Tests.TestObjects;
 using Xunit;
 
-namespace OneTrueError.Client.NetStd.Tests.ContextCollections
+namespace OneTrueError.Client.NetStd.Tests.Config.ContextCollections
 {
     public class ObjectToContextCollectionConverterTests
     {
@@ -43,6 +43,23 @@ namespace OneTrueError.Client.NetStd.Tests.ContextCollections
             x();
         }
         #endregion
+
+        [Fact]
+        public void should_be_able_to_handle_nested_inner_exceptions()
+        {
+            var ex1= new ArgumentNullException("moot");
+            ex1.Data["aa"] = "World";
+            var ex2 = new ArgumentException("Ex2","SomeProperty", ex1);
+            var ex3= new Exception("Ex3", ex2);
+
+            var sut = new ObjectToContextCollectionConverter();
+            var actual = sut.Convert(ex3);
+
+            actual.Properties["Message"].Should().Be("Ex3");
+            actual.Properties["InnerException.Message"].Should().Contain("Ex2");
+            actual.Properties["InnerException.ParamName"].Should().Be("SomeProperty");
+            actual.Properties["InnerException.InnerException.Message"].Should().Be("moot");
+        }
 
         [Fact]
         public void MEdiaPortalArgumentException()

@@ -6,10 +6,15 @@ namespace OneTrueError.Client.NetStd.Demo
     {
         static void Main(string[] args)
         {
-            var uri = new Uri("http://localhost:64707/");
+            var uri = new Uri("http://ote-buildagent1.westeurope.cloudapp.azure.com/onetrueerror/");
             OneTrue.Configuration.Credentials(uri,
-                "2acaa7e303e0445295e03d5f35182b33",
-                "6892bb2907b7498dbe6c5c540335765a");
+                "52cbfd2f2aae49d4aa68c6cce1f484a6",
+                "2922ba4a0db24b12b97055a83f84ffd3");
+            //var uri = new Uri("http://localhost:50473/");
+            //OneTrue.Configuration.Credentials(uri,
+            //    "5f219f356daa40b3b31dfc67514df6d6",
+            //    "22612e4444f347d1bb3d841d64c9750a");
+
 
             try
             {

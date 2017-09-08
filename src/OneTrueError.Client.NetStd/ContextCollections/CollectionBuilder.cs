@@ -76,7 +76,7 @@ namespace OneTrueError.Client.ContextCollections
         /// <summary>
         ///     Tag incident server side.
         /// </summary>
-        /// <param name="tags">Tags to add (stackoverflow-named tags or organization specific)</param>
+        /// <param name="tags">Tags to add (StackOverflow-named tags or organization specific)</param>
         /// <returns>Collection</returns>
         /// <remarks>
         ///     <para>
@@ -88,8 +88,8 @@ namespace OneTrueError.Client.ContextCollections
             if (tags == null) throw new ArgumentNullException(nameof(tags));
             if (tags.Length == 0) throw new ArgumentOutOfRangeException("tags", "Must specify at least one tag.");
 
-            var props = new Dictionary<string, string> {{"Tags", string.Join(";", tags)}};
-            return new ContextCollectionDTO("OneTrueTags", props);
+            var props = new Dictionary<string, string> {{ "OneTrueTags", string.Join(",", tags)}};
+            return new ContextCollectionDTO("IncidentTags", props);
         }
 
         /// <summary>
@@ -115,7 +115,9 @@ namespace OneTrueError.Client.ContextCollections
 
         private static Tuple<string, string> SplitAccountName(string accountName)
         {
-            var pos = accountName.IndexOf("\\");
+            if (accountName == null) throw new ArgumentNullException(nameof(accountName));
+
+            var pos = accountName.IndexOf("\\", StringComparison.Ordinal);
             if (pos != -1)
             {
                 var a = accountName.Substring(0, pos);
