@@ -89,7 +89,7 @@ namespace OneTrueError.Client.ContextCollections
                 throw new ArgumentNullException("instance");
             if (IsFilteredOut(instance))
                 return new ContextCollectionDTO(collectionName,
-                    new Dictionary<string, string> {{"Error", "The object type can not be traversed by OneTrueError"}});
+                    new Dictionary<string, string> { { "Error", "The object type can not be traversed by OneTrueError" } });
 
             var props = ConvertToDictionary("", instance);
             return new ContextCollectionDTO(collectionName, props);
@@ -114,9 +114,9 @@ namespace OneTrueError.Client.ContextCollections
 
 
             if (instance is ContextCollectionDTO)
-                return (ContextCollectionDTO) instance;
+                return (ContextCollectionDTO)instance;
             if (instance is IDictionary<string, string>)
-                return new ContextCollectionDTO("ContextData", (IDictionary<string, string>) instance);
+                return new ContextCollectionDTO("ContextData", (IDictionary<string, string>)instance);
 
             var name = instance.GetType().IsAnonymousType() || IsSimpleType(instance.GetType())
                 ? "ContextData"
@@ -148,7 +148,7 @@ namespace OneTrueError.Client.ContextCollections
                 {
                     var path = new List<object>();
                     _dictionaryConverterMethod.MakeGenericMethod(dictIf.GenericTypeArguments)
-                        .Invoke(this, new[] {prefix, instance, destination, path});
+                        .Invoke(this, new[] { prefix, instance, destination, path });
                     return;
                 }
                 var kvpTypes = GetKeyValuePairFromEnumeratorInterface(instance);
@@ -156,7 +156,7 @@ namespace OneTrueError.Client.ContextCollections
                 {
                     var path = new List<object>();
                     _keyValuePairEnumeratorConverterMethod.MakeGenericMethod(kvpTypes)
-                        .Invoke(this, new[] {prefix, instance, destination, path});
+                        .Invoke(this, new[] { prefix, instance, destination, path });
                     return;
                 }
                 if (instance is IDictionary<string, string> dictionary)
@@ -170,7 +170,7 @@ namespace OneTrueError.Client.ContextCollections
 
                 if (instance is IDictionary)
                 {
-                    FlattenDictionary((IDictionary) instance, destination);
+                    FlattenDictionary((IDictionary)instance, destination);
                     return;
                 }
                 if (IsSimpleType(instance.GetType()))
@@ -268,6 +268,7 @@ namespace OneTrueError.Client.ContextCollections
             var type = source.GetType().GetTypeInfo();
             while (!type.Name.Equals("object", StringComparison.OrdinalIgnoreCase))
             {
+
                 foreach (var propInfo in type.DeclaredProperties)
                 {
                     //TODO: Add support.
@@ -285,33 +286,33 @@ namespace OneTrueError.Client.ContextCollections
                     }
                     catch (Exception exception)
                     {
-                        destination.Add(prefix + propertyName + "._error", exception.ToString());
+                        destination[prefix + propertyName + "._error"] = exception.ToString();
                         continue;
                     }
 
                     if (value == null)
                     {
-                        destination.Add(prefix + propertyName, "null");
+                        destination[prefix + propertyName] = "null";
                         continue;
                     }
                     if (value is Encoding enc)
                     {
-                        destination.Add(prefix + propertyName, enc.EncodingName);
+                        destination[prefix + propertyName] = enc.EncodingName;
                         continue;
                     }
                     if (value is DateTimeFormatInfo v1)
                     {
-                        destination.Add(prefix + propertyName, v1.FullDateTimePattern);
+                        destination[prefix + propertyName] = v1.FullDateTimePattern;
                         continue;
                     }
                     if (value is CultureInfo v2)
                     {
-                        destination.Add(prefix + propertyName, "Culture[\"" + v2.Name + "\"]");
+                        destination[prefix + propertyName] = $"Culture[\"{v2.Name}\"]";
                         continue;
                     }
                     if (IsSimpleType(value.GetType()) || propertyName == "Encoding")
                     {
-                        destination.Add(prefix + propertyName, value.ToString());
+                        destination[prefix + propertyName] = value.ToString();
                     }
                     else
                     {
@@ -372,7 +373,7 @@ namespace OneTrueError.Client.ContextCollections
 
                 type = type.BaseType.GetTypeInfo();
             }
-           
+
 
             path.Remove(source);
         }
@@ -428,12 +429,12 @@ namespace OneTrueError.Client.ContextCollections
                 if (dictIf != null)
                 {
                     _dictionaryConverterMethod.MakeGenericMethod(dictIf.GenericTypeArguments)
-                        .Invoke(this, new[] {propertyName, source, destination, path});
+                        .Invoke(this, new[] { propertyName, source, destination, path });
                 }
                 else if (kvpTypes != null)
                 {
                     _keyValuePairEnumeratorConverterMethod.MakeGenericMethod(kvpTypes)
-                        .Invoke(this, new[] {propertyName, source, destination, path});
+                        .Invoke(this, new[] { propertyName, source, destination, path });
                 }
 
                 else if (source is IDictionary)

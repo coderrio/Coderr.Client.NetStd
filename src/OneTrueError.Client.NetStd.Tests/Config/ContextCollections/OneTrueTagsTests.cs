@@ -3,17 +3,17 @@ using FluentAssertions;
 using OneTrueError.Client.ContextCollections;
 using Xunit;
 
-namespace OneTrueError.Client.NetStd.Tests.ContextCollections
+namespace OneTrueError.Client.NetStd.Tests.Config.ContextCollections
 {
     public class OneTrueTagsTests
     {
         [Fact]
-        public void should_include_tags_as_a_semicolon_separated_list()
+        public void should_include_tags_as_a_comma_separated_list()
         {
             
             var actual = CollectionBuilder.CreateTags("csharp", "ado.net");
 
-            actual.Properties["Tags"].Should().Be("csharp;ado.net");
+            actual.Properties["OneTrueTags"].Should().Be("csharp,ado.net");
         }
 
         [Fact]

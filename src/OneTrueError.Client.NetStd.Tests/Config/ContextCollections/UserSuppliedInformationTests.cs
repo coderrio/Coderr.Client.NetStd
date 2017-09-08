@@ -2,7 +2,7 @@
 using OneTrueError.Client.ContextCollections;
 using Xunit;
 
-namespace OneTrueError.Client.NetStd.Tests.ContextCollections
+namespace OneTrueError.Client.NetStd.Tests.Config.ContextCollections
 {
     public class UserSuppliedInformationTests
     {

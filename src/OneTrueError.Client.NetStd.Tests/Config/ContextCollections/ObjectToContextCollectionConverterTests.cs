@@ -58,7 +58,7 @@ namespace OneTrueError.Client.NetStd.Tests.Config.ContextCollections
             actual.Properties["Message"].Should().Be("Ex3");
             actual.Properties["InnerException.Message"].Should().Contain("Ex2");
             actual.Properties["InnerException.ParamName"].Should().Be("SomeProperty");
-            actual.Properties["InnerException.InnerException.Message"].Should().Be("moot");
+            actual.GetProperty("InnerException.InnerException.Message").Should().Contain("moot");
         }
 
         [Fact]

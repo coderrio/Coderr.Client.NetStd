@@ -1,6 +1,6 @@
 using System.Security.Principal;
 
-namespace OneTrueError.Client.NetStd.Tests.ContextCollections
+namespace OneTrueError.Client.NetStd.Tests.Config.ContextCollections.TestObjects
 {
     public class MyIdentity : IIdentity
     {

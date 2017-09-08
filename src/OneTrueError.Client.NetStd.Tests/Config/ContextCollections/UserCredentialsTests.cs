@@ -1,8 +1,9 @@
 ﻿using FluentAssertions;
 using OneTrueError.Client.ContextCollections;
+using OneTrueError.Client.NetStd.Tests.Config.ContextCollections.TestObjects;
 using Xunit;
 
-namespace OneTrueError.Client.NetStd.Tests.ContextCollections
+namespace OneTrueError.Client.NetStd.Tests.Config.ContextCollections
 {
     public class UserCredentialsTests
     {
