@@ -51,4 +51,4 @@ The context information will be attached as:
 
 # Requirements
 
-You need to either install [https://github.com/onetrueerror/onetrueerror.server/](OneTrueError Community Server) or use [OneTrueError Live](https://onetrueerror.com/live).
+You need to either install [OneTrueError Community Server](https://github.com/onetrueerror/onetrueerror.server) or use [OneTrueError Live](https://onetrueerror.com/live).
