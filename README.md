@@ -1,6 +1,8 @@
 Integration library for NET Standard 1.5 and above
 ==========================
 
+[![VSTS](https://onetrueerror.visualstudio.com/_apis/public/build/definitions/75570083-b1ef-4e78-88e2-5db4982f756c/3/badge)]() [![NuGet](https://img.shields.io/nuget/dt/OneTrueError.Client.NetStd.svg?style=flat-square)]()
+
 This client library is used to manually report exceptions to OneTrueError (`OneTrue.Report(exception)`).
 
 For more information about OneTrueError, check the [homepage](https://onetrueerror.com).
