@@ -1,17 +1,17 @@
 Integration library for NET Standard 1.5 and above
 ==========================
 
-[![VSTS](https://onetrueerror.visualstudio.com/_apis/public/build/definitions/75570083-b1ef-4e78-88e2-5db4982f756c/3/badge)]() [![NuGet](https://img.shields.io/nuget/dt/OneTrueError.Client.NetStd.svg?style=flat-square)]()
+[![VSTS](https://coderr.visualstudio.com/_apis/public/build/definitions/75570083-b1ef-4e78-88e2-5db4982f756c/3/badge)]() [![NuGet](https://img.shields.io/nuget/dt/codeRR.Client.NetStd.svg?style=flat-square)]()
 
-This client library is used to manually report exceptions to OneTrueError (`OneTrue.Report(exception)`).
+This client library is used to manually report exceptions to codeRR (`OneTrue.Report(exception)`).
 
-For more information about OneTrueError, check the [homepage](https://onetrueerror.com).
+For more information about codeRR, check the [homepage](https://coderrapp.com).
 
 # Installation
 
-1. Download and install the [OneTrueError server](https://github.com/onetrueerror/onetrueerror.server) or create an account at [OneTrueError.com](https://onetrueerror.com)
-2. Install this client library (using nuget `onetrueerror.client.netstd`)
-3. Configure the credentials from your OneTrueError account in your `Program.cs`.
+1. Download and install the [codeRR server](https://github.com/coderrapp/coderr.server) or create an account at [codeRR.com](https://coderrapp.com)
+2. Install this client library (using nuget `coderr.client.netstd`)
+3. Configure the credentials from your codeRR account in your `Program.cs`.
 
 # Getting started
 
@@ -33,9 +33,9 @@ public void UpdatePost(int uid, ForumPost post)
 
 The context information will be attached as:
 
-![](https://onetrueerror.com/images/features/custom-context.png)
+![](https://coderrapp.com/images/features/custom-context.png)
 
-[Read more...](https://onetrueerror.com/features/)
+[Read more...](https://coderrapp.com/features/)
 
 #  Features in this library
 
@@ -53,4 +53,4 @@ The context information will be attached as:
 
 # Requirements
 
-You need to either install [OneTrueError Community Server](https://github.com/onetrueerror/onetrueerror.server) or use [OneTrueError Live](https://onetrueerror.com/live).
+You need to either install [codeRR Community Server](https://github.com/coderrapp/coderr.server) or use [codeRR Live](https://coderrapp.com/live).
