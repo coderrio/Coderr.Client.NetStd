@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using FluentAssertions;
-using codeRR.IntegrationTests.Tools.Client;
+using OneTrueError.IntegrationTests.Tools.Client;
 using Xunit;
 
 namespace codeRR.Client.NetStd.IntegrationTests

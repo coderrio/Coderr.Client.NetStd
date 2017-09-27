@@ -19,6 +19,8 @@ https://github.com/coderrapp/codeRR.Client.NetStandard
 Reporting exceptions
 ====================
 
+This is one of many many examples ;)
+
 public void SomeMethod(int userId, int postId)
 {
   try
@@ -30,3 +32,5 @@ public void SomeMethod(int userId, int postId)
     OneTrue.Report(ex, new { userId, postId });
   }
 }
+
+Find more in our documentation.
