@@ -6,17 +6,17 @@ Congratulations on taking the first step toward a more efficient exception handl
 Now you need to either download and install the open source server: https://github.com/coderrapp/codeRR.Server/
 .. or create an account at https://coderrapp.com.
 
-Once done, log into the server and find the configuration instructions.
+Once done, log into the server to find configuration instructions.
 (Or read the articles in our documentation: https://coderrapp.com/documentation)
 
 Questions & Feedback:
 http://discuss.coderrapp.com/
 
 Source code:
-https://github.com/coderrapp/codeRR.Client.NetStandard
+https://github.com/coderrapp/codeRR.Client.NetStd
 
 
-Reporting exceptions
+Reporting exceptions manually
 ====================
 
 This is one of many many examples ;)
@@ -33,4 +33,7 @@ public void SomeMethod(int userId, int postId)
   }
 }
 
-Find more in our documentation.
+For automated reported, download one of the integration libraries for MVC, WebApi2, WCF etc.
+
+Find more examples and information in our documentation. 
+

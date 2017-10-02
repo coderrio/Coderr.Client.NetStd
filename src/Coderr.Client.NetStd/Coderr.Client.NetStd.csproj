@@ -4,7 +4,7 @@
     <TargetFrameworks>netstandard1.5;netstandard2.0</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RootNamespace>codeRR.Client</RootNamespace>
-    <PackageId>codeRR.Client.NetStd</PackageId>
+    <PackageId>Coderr.Client.NetStd</PackageId>
     <Authors>1TCompany AB</Authors>
     <Description>Automates exception handling for .NET core applications</Description>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
@@ -15,8 +15,8 @@
     <RepositoryType>git</RepositoryType>
     <PackageLicenseUrl>https://raw.githubusercontent.com/coderrapp/codeRR.Client.NetStd/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://coderrapp.com</PackageProjectUrl>
-    <PackageReleaseNotes>Bug fixes </PackageReleaseNotes>
-    <Version>1.0.1</Version>
+    <PackageReleaseNotes>First release</PackageReleaseNotes>
+    <Version>1.0.0</Version>
     <AssemblyName>Coderr.Client.NetStd</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
