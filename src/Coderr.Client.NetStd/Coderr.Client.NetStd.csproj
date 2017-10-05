@@ -15,7 +15,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageLicenseUrl>https://raw.githubusercontent.com/coderrapp/codeRR.Client.NetStd/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://coderrapp.com</PackageProjectUrl>
-    <PackageReleaseNotes>First release</PackageReleaseNotes>
+    <PackageReleaseNotes>Naming changes from "OneTrue" to just "Err"</PackageReleaseNotes>
     <Version>1.0.1</Version>
     <AssemblyName>Coderr.Client.NetStd</AssemblyName>
   </PropertyGroup>
