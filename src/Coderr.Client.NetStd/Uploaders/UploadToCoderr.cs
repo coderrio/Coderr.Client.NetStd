@@ -59,8 +59,8 @@ namespace codeRR.Client.Uploaders
             _reportQueue.UploadFailed += OnUploadFailed;
 
             _uploadFunc = message => _client.SendAsync(message);
-            _queueReportsAccessor = () => OneTrue.Configuration.QueueReports;
-            _throwExceptionsAccessor = () => OneTrue.Configuration.ThrowExceptions;
+            _queueReportsAccessor = () => Err.Configuration.QueueReports;
+            _throwExceptionsAccessor = () => Err.Configuration.ThrowExceptions;
         }
 
         /// <summary>

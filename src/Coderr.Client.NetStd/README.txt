@@ -29,11 +29,10 @@ public void SomeMethod(int userId, int postId)
   }
   catch (Exception ex)
   {
-    OneTrue.Report(ex, new { userId, postId });
+    Err.Report(ex, new { userId, postId });
   }
 }
 
 For automated reported, download one of the integration libraries for MVC, WebApi2, WCF etc.
 
 Find more examples and information in our documentation. 
-

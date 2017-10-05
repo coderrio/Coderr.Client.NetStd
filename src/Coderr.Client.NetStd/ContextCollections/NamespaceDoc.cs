@@ -8,7 +8,7 @@ namespace codeRR.Client.ContextCollections
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         Providers are mananaged through <c>OneTrue.Configuration.ContextProviders</c>.
+    ///         Providers are mananaged through <c>Err.Configuration.ContextProviders</c>.
     ///     </para>
     /// </remarks>
     [CompilerGenerated]

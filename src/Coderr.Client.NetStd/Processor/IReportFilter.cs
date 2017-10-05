@@ -4,7 +4,7 @@
     ///     Invoked for every report that is about to be uploaded.
     /// </summary>
     /// <remarks>
-    ///     Register the filter using <c>OneTrue.Configuration.FilterCollection.</c>
+    ///     Register the filter using <c>Err.Configuration.FilterCollection.</c>
     /// </remarks>
     public interface IReportFilter
     {

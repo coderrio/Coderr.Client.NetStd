@@ -5,7 +5,7 @@ using Xunit;
 
 namespace codeRR.Client.NetStd.Tests.Config.ContextCollections
 {
-    public class OneTrueTagsTests
+    public class ErrTagsTests
     {
         [Fact]
         public void should_include_tags_as_a_comma_separated_list()
@@ -13,7 +13,7 @@ namespace codeRR.Client.NetStd.Tests.Config.ContextCollections
             
             var actual = CollectionBuilder.CreateTags("csharp", "ado.net");
 
-            actual.Properties["OneTrueTags"].Should().Be("csharp,ado.net");
+            actual.Properties["ErrTags"].Should().Be("csharp,ado.net");
         }
 
         [Fact]

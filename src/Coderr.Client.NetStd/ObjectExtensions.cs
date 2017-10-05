@@ -46,7 +46,7 @@ namespace codeRR.Client
 
             var converter = new ObjectToContextCollectionConverter
             {
-                MaxPropertyCount = OneTrue.Configuration.MaxNumberOfPropertiesPerCollection
+                MaxPropertyCount = Err.Configuration.MaxNumberOfPropertiesPerCollection
             };
             return converter.Convert(instance);
         }
@@ -66,7 +66,7 @@ namespace codeRR.Client
 
             var converter = new ObjectToContextCollectionConverter
             {
-                MaxPropertyCount = OneTrue.Configuration.MaxNumberOfPropertiesPerCollection
+                MaxPropertyCount = Err.Configuration.MaxNumberOfPropertiesPerCollection
             };
             return converter.Convert(name, instance);
         }

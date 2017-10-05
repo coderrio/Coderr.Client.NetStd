@@ -14,15 +14,15 @@ namespace codeRR.Client.NetStd.IntegrationTests
 
         public ContextCollectionTests()
         {
-            OneTrue.Configuration.Credentials(ServerKeys.Url,
+            Err.Configuration.Credentials(ServerKeys.Url,
                 ServerKeys.AppAppKey,
                 ServerKeys.AppSharedSecret);
         }
 
         [Fact]
-        public async Task should_tag_incident_when_OneTrueTags_is_added_to_a_collection()
+        public async Task should_tag_incident_when_ErrTags_is_added_to_a_collection()
         {
-            var methodName = nameof(should_tag_incident_when_OneTrueTags_is_added_to_a_collection);
+            var methodName = nameof(should_tag_incident_when_ErrTags_is_added_to_a_collection);
             var id = Guid.NewGuid().ToString();
             
             try
@@ -31,7 +31,7 @@ namespace codeRR.Client.NetStd.IntegrationTests
             }
             catch (Exception ex)
             {
-                OneTrue.Report(ex, new {OneTrueTags = "important,data"});
+                Err.Report(ex, new {ErrTags = "important,data"});
             }
 
             var incident = await _client.GetIncident(methodName, id);
@@ -52,7 +52,7 @@ namespace codeRR.Client.NetStd.IntegrationTests
             catch (Exception ex)
             {
                 var collection = CollectionBuilder.CreateTags("max", "overdrive");
-                OneTrue.Report(ex, collection);
+                Err.Report(ex, collection);
             }
 
             var incident = await _client.GetIncident(methodName, id);

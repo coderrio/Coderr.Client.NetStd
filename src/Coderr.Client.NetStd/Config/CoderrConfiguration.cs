@@ -8,7 +8,7 @@ namespace codeRR.Client.Config
     /// <summary>
     ///     Configuration root object.
     /// </summary>
-    public class OneTrueConfiguration : IDisposable
+    public class CoderrConfiguration : IDisposable
     {
         /// <summary>
         ///     Configure how the reporting UI will interact with the user.
@@ -16,9 +16,9 @@ namespace codeRR.Client.Config
         private UserInteractionConfiguration _userInteraction = new UserInteractionConfiguration();
 
         /// <summary>
-        ///     Creates a new instance of <see cref="OneTrueConfiguration" />.
+        ///     Creates a new instance of <see cref="CoderrConfiguration" />.
         /// </summary>
-        public OneTrueConfiguration()
+        public CoderrConfiguration()
         {
             Uploaders = new UploadDispatcher(this);
             _userInteraction.AskUserForDetails = true;
@@ -28,10 +28,10 @@ namespace codeRR.Client.Config
 
 
         /// <summary>
-        ///     Creates a new instance of <see cref="OneTrueConfiguration" />.
+        ///     Creates a new instance of <see cref="CoderrConfiguration" />.
         /// </summary>
         /// <exception cref="ArgumentNullException">uploadDispatcher</exception>
-        public OneTrueConfiguration(IUploadDispatcher uploadDispatcher)
+        public CoderrConfiguration(IUploadDispatcher uploadDispatcher)
         {
             Uploaders = uploadDispatcher ?? throw new ArgumentNullException(nameof(uploadDispatcher));
             _userInteraction.AskUserForDetails = true;

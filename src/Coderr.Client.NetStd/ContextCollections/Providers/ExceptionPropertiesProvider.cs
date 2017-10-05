@@ -29,7 +29,7 @@ namespace codeRR.Client.ContextCollections.Providers
             {
                 var converter = new ObjectToContextCollectionConverter
                 {
-                    MaxPropertyCount = OneTrue.Configuration.MaxNumberOfPropertiesPerCollection
+                    MaxPropertyCount = Err.Configuration.MaxNumberOfPropertiesPerCollection
                 };
                 var collection = converter.Convert(context.Exception);
                 collection.Name = "ExceptionProperties";

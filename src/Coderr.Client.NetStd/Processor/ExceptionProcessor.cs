@@ -12,14 +12,14 @@ namespace codeRR.Client.Processor
     /// </summary>
     public class ExceptionProcessor
     {
-        private readonly OneTrueConfiguration _configuration;
+        private readonly CoderrConfiguration _configuration;
 
         /// <summary>
         ///     Creates a new instance of <see cref="ExceptionProcessor" />.
         /// </summary>
         /// <param name="configuration">Current configuration.</param>
         /// <exception cref="ArgumentNullException">configuration</exception>
-        public ExceptionProcessor(OneTrueConfiguration configuration)
+        public ExceptionProcessor(CoderrConfiguration configuration)
         {
             if (configuration == null) throw new ArgumentNullException("configuration");
             _configuration = configuration;
@@ -132,7 +132,7 @@ namespace codeRR.Client.Processor
         ///         Will collect context info, generate a report, go through filters and finally upload it.
         ///     </para>
         ///     <para>
-        ///         Do note that reports can be discared if a filter in <c>OneTrue.Configuration.FilterCollection</c> says so.
+        ///         Do note that reports can be discared if a filter in <c>Err.Configuration.FilterCollection</c> says so.
         ///     </para>
         /// </remarks>
         public void Process(Exception exception, object contextData)

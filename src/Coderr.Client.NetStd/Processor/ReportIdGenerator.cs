@@ -7,7 +7,7 @@ namespace codeRR.Client.Processor
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         The reportId id is the string which are used during communication between the end customers and the OneTrue
+    ///         The reportId id is the string which are used during communication between the end customers and the Err
     ///         error
     ///         customers.
     ///     </para>

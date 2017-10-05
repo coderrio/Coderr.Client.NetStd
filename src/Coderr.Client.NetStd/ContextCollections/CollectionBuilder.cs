@@ -88,7 +88,7 @@ namespace codeRR.Client.ContextCollections
             if (tags == null) throw new ArgumentNullException(nameof(tags));
             if (tags.Length == 0) throw new ArgumentOutOfRangeException("tags", "Must specify at least one tag.");
 
-            var props = new Dictionary<string, string> {{ "OneTrueTags", string.Join(",", tags)}};
+            var props = new Dictionary<string, string> {{ "ErrTags", string.Join(",", tags)}};
             return new ContextCollectionDTO("IncidentTags", props);
         }
 

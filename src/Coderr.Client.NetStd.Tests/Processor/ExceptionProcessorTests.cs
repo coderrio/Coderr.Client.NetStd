@@ -19,7 +19,7 @@ namespace codeRR.Client.NetStd.Tests.Processor
         public void should_use_the_assigned_reportId_factory_to_assign_a_report_id()
         {
             var dispatcher = Substitute.For<IUploadDispatcher>();
-            var config = new OneTrueConfiguration(dispatcher);
+            var config = new CoderrConfiguration(dispatcher);
             var ex = new Exception();
             var timesInvoked = 0;
             ReportIdGenerator.Assign(x => { timesInvoked++; return "a"; });
@@ -36,7 +36,7 @@ namespace codeRR.Client.NetStd.Tests.Processor
         public void should_add_the_exception_to_the_report_so_that_it_can_be_uploaded()
         {
             var dispatcher = Substitute.For<IUploadDispatcher>();
-            var config = new OneTrueConfiguration(dispatcher);
+            var config = new CoderrConfiguration(dispatcher);
             var ex = new Exception("hello");
 
             var sut = new ExceptionProcessor(config);
@@ -53,7 +53,7 @@ namespace codeRR.Client.NetStd.Tests.Processor
         public void should_add_context_data_object_to_report()
         {
             var dispatcher = Substitute.For<IUploadDispatcher>();
-            var config = new OneTrueConfiguration(dispatcher);
+            var config = new CoderrConfiguration(dispatcher);
             var ex = new Exception("hello");
 
             var sut = new ExceptionProcessor(config);
@@ -66,7 +66,7 @@ namespace codeRR.Client.NetStd.Tests.Processor
         public void should_add_custom_collection_to_report()
         {
             var dispatcher = Substitute.For<IUploadDispatcher>();
-            var config = new OneTrueConfiguration(dispatcher);
+            var config = new CoderrConfiguration(dispatcher);
             var ex = new Exception("hello");
             var collection = "Hello you too".ToContextCollection("MyName");
 
@@ -80,7 +80,7 @@ namespace codeRR.Client.NetStd.Tests.Processor
         public void should_add_all_custom_collection_to_report()
         {
             var dispatcher = Substitute.For<IUploadDispatcher>();
-            var config = new OneTrueConfiguration(dispatcher);
+            var config = new CoderrConfiguration(dispatcher);
             var ex = new Exception("hello");
             var collection1 = "Hello you too".ToContextCollection("MyName");
             var collection2 = "Hello you too2".ToContextCollection("MyName2");
@@ -96,7 +96,7 @@ namespace codeRR.Client.NetStd.Tests.Processor
         public void should_not_upload_reports_if_the_filters_says_no()
         {
             var dispatcher = Substitute.For<IUploadDispatcher>();
-            var config = new OneTrueConfiguration(dispatcher);
+            var config = new CoderrConfiguration(dispatcher);
             var filter = Substitute.For<IReportFilter>();
             var ex = new Exception("hello");
             filter.Invoke(Arg.Do<ReportFilterContext>(context => context.CanSubmitReport = false));
@@ -112,7 +112,7 @@ namespace codeRR.Client.NetStd.Tests.Processor
         public void should_upload_reports_if_the_filters_says_ok()
         {
             var dispatcher = Substitute.For<IUploadDispatcher>();
-            var config = new OneTrueConfiguration(dispatcher);
+            var config = new CoderrConfiguration(dispatcher);
             var filter = Substitute.For<IReportFilter>();
             var ex = new Exception("hello");
             filter.Invoke(Arg.Do<ReportFilterContext>(context => context.CanSubmitReport = true));
@@ -128,7 +128,7 @@ namespace codeRR.Client.NetStd.Tests.Processor
         public void should_upload_reports_if_there_are_no_filters()
         {
             var dispatcher = Substitute.For<IUploadDispatcher>();
-            var config = new OneTrueConfiguration(dispatcher);
+            var config = new CoderrConfiguration(dispatcher);
             var ex = new Exception("hello");
 
             var sut = new ExceptionProcessor(config);

@@ -10,11 +10,11 @@ namespace codeRR.Client
     /// <summary>
     /// Starting point for using the codeRR client.
     /// </summary>
-    public class OneTrue
+    public class Err
     {
         private static readonly ExceptionProcessor _exceptionProcessor;
 
-        static OneTrue()
+        static Err()
         {
             _exceptionProcessor = new ExceptionProcessor(Configuration);
         }
@@ -22,7 +22,7 @@ namespace codeRR.Client
         /// <summary>
         ///     Access configuration options
         /// </summary>
-        public static OneTrueConfiguration Configuration { get; } = new OneTrueConfiguration();
+        public static CoderrConfiguration Configuration { get; } = new CoderrConfiguration();
 
         /// <summary>
         ///     Will generate a report without uploading it.
@@ -34,10 +34,10 @@ namespace codeRR.Client
         ///     <para>
         ///         A lot if context information is also included in the error report. You can configure the attached information
         ///         by
-        ///         using <c>OneTrue.Configuration.ContextProviders.Add()</c>
+        ///         using <c>Err.Configuration.ContextProviders.Add()</c>
         ///     </para>
         ///     <para>
-        ///         All library exceptions are directed to the <c>OneTrue.ReportingFailed</c> event.
+        ///         All library exceptions are directed to the <c>Err.ReportingFailed</c> event.
         ///         Subscribe on that event if you have trouble with reporting exceptions.
         ///     </para>
         /// </remarks>
@@ -57,7 +57,7 @@ namespace codeRR.Client
         /// 	}
         /// 	catch (Exception exception)
         /// 	{
-        /// 		OneTrue.Report(exception);
+        /// 		Err.Report(exception);
         /// 	}
         /// }
         /// </code>
@@ -86,10 +86,10 @@ namespace codeRR.Client
         ///     <para>
         ///         A lot if context information is also included in the error report. You can configure the attached information
         ///         by
-        ///         using <c>OneTrue.Configuration.ContextProviders.Add()</c>
+        ///         using <c>Err.Configuration.ContextProviders.Add()</c>
         ///     </para>
         ///     <para>
-        ///         All library exceptions are directed to the <c>OneTrue.ReportingFailed</c> event.
+        ///         All library exceptions are directed to the <c>Err.ReportingFailed</c> event.
         ///         Subscribe on that event if you have trouble with reporting exceptions.
         ///     </para>
         /// </remarks>
@@ -109,7 +109,7 @@ namespace codeRR.Client
         /// 	}
         /// 	catch (Exception exception)
         /// 	{
-        /// 		OneTrue.Report(exception);
+        /// 		Err.Report(exception);
         /// 	}
         /// }
         /// </code>
@@ -191,10 +191,10 @@ namespace codeRR.Client
         ///     <para>
         ///         A lot if context information is also included in the error report. You can configure the attached information
         ///         by
-        ///         using <c>OneTrue.Configuration.ContextProviders.Add()</c>
+        ///         using <c>Err.Configuration.ContextProviders.Add()</c>
         ///     </para>
         ///     <para>
-        ///         All library exceptions are directed to the <c>OneTrue.ReportingFailed</c> event.
+        ///         All library exceptions are directed to the <c>Err.ReportingFailed</c> event.
         ///         Subscribe on that event if you have trouble with reporting exceptions.
         ///     </para>
         /// </remarks>
@@ -214,7 +214,7 @@ namespace codeRR.Client
         /// 	}
         /// 	catch (Exception exception)
         /// 	{
-        /// 		OneTrue.Report(exception);
+        /// 		Err.Report(exception);
         /// 	}
         /// }
         /// </code>
@@ -248,10 +248,10 @@ namespace codeRR.Client
         ///         Context information will be collected and included in the error report. You can configure the attached
         ///         information
         ///         by
-        ///         using <c>OneTrue.Configuration.ContextProviders</c>
+        ///         using <c>Err.Configuration.ContextProviders</c>
         ///     </para>
         ///     <para>
-        ///         All library exceptions are directed to the <c>OneTrue.ReportingFailed</c> event.
+        ///         All library exceptions are directed to the <c>Err.ReportingFailed</c> event.
         ///         Subscribe on that event if you have trouble with reporting exceptions.
         ///     </para>
         /// </remarks>
@@ -271,7 +271,7 @@ namespace codeRR.Client
         /// 	}
         /// 	catch (Exception exception)
         /// 	{
-        /// 		OneTrue.Report(exception, model);
+        /// 		Err.Report(exception, model);
         /// 	}
         /// }
         /// </code>
@@ -302,10 +302,10 @@ namespace codeRR.Client
         ///         Context information will be collected and included in the error report. You can configure the attached
         ///         information
         ///         by
-        ///         using <c>OneTrue.Configuration.ContextProviders</c>
+        ///         using <c>Err.Configuration.ContextProviders</c>
         ///     </para>
         ///     <para>
-        ///         All library exceptions are directed to the <c>OneTrue.ReportingFailed</c> event.
+        ///         All library exceptions are directed to the <c>Err.ReportingFailed</c> event.
         ///         Subscribe on that event if you have trouble with reporting exceptions.
         ///     </para>
         /// </remarks>
@@ -325,7 +325,7 @@ namespace codeRR.Client
         /// 	}
         /// 	catch (Exception exception)
         /// 	{
-        /// 		OneTrue.Report(exception, model);
+        /// 		Err.Report(exception, model);
         /// 	}
         /// }
         /// </code>

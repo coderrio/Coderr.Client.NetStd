@@ -16,14 +16,14 @@ namespace codeRR.Client.Uploaders
     ///         care of invoking all uploaders.
     ///     </para>
     ///     <para>
-    ///         This class uses the <see cref="OneTrueConfiguration.QueueReports" /> to determine if uploads should be done in
+    ///         This class uses the <see cref="CoderrConfiguration.QueueReports" /> to determine if uploads should be done in
     ///         the background (i.e. don't fail on errors, attempt again late).
     ///     </para>
     /// </remarks>
     /// <seealso cref="UploadQueue{T}" />
     public class UploadDispatcher : IUploadDispatcher
     {
-        private readonly OneTrueConfiguration _configuration;
+        private readonly CoderrConfiguration _configuration;
         private readonly List<IReportUploader> _uploaders = new List<IReportUploader>();
 
 
@@ -32,7 +32,7 @@ namespace codeRR.Client.Uploaders
         /// </summary>
         /// <param name="configuration">Used to check at runtime of queuing is enabled or not.</param>
         /// <exception cref="ArgumentNullException">configuration</exception>
-        public UploadDispatcher(OneTrueConfiguration configuration)
+        public UploadDispatcher(CoderrConfiguration configuration)
         {
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }

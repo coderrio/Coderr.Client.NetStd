@@ -7,7 +7,7 @@ namespace codeRR.Client.Uploaders
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         You can catch this exception using the <c>OneTrue.Configuration.Advanced.ReportingFailed</c> event.
+    ///         You can catch this exception using the <c>Err.Configuration.Advanced.ReportingFailed</c> event.
     ///     </para>
     /// </remarks>
     [Serializable]

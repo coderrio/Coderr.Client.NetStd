@@ -7,13 +7,13 @@ using Xunit;
 
 namespace codeRR.Client.NetStd.Tests.Config
 {
-    public class OneTrueConfigurationTests
+    public class CoderrConfigurationTests
     {
         [Fact]
         public void should_initialize_contextProviders_collection_so_that_providers_can_Be_found_And_Registered()
         {
 
-            var sut = new OneTrueConfiguration();
+            var sut = new CoderrConfiguration();
 
             sut.ContextProviders.Should().NotBeNull();
         }
@@ -22,7 +22,7 @@ namespace codeRR.Client.NetStd.Tests.Config
         public void should_initialize_FilterCollection_so_that_errorReports_can_be_filtered_out_or_sampled()
         {
 
-            var sut = new OneTrueConfiguration();
+            var sut = new CoderrConfiguration();
 
             sut.FilterCollection.Should().NotBeNull();
         }
@@ -32,7 +32,7 @@ namespace codeRR.Client.NetStd.Tests.Config
         {
             var dispatcher = Substitute.For<IUploadDispatcher>();
 
-            var sut = new OneTrueConfiguration(dispatcher);
+            var sut = new CoderrConfiguration(dispatcher);
             sut.Credentials(new Uri("http://localhost"), "ada", "buffen");
 
             dispatcher.Received().Register(Arg.Any<UploadTocodeRR>());

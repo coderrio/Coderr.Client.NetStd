@@ -3,7 +3,7 @@
 namespace codeRR.Client.Config
 {
     /// <summary>
-    ///     Main configuration objects. Assessible through the <see cref="OneTrue.Configuration" /> property.
+    ///     Main configuration objects. Assessible through the <see cref="Err.Configuration" /> property.
     /// </summary>
     [CompilerGenerated]
     internal class NamespaceDoc

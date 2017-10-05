@@ -12,7 +12,7 @@ namespace codeRR.Client.NetStd.IntegrationTests
 
         public ReportUploadTests()
         {
-            OneTrue.Configuration.Credentials(ServerKeys.Url,
+            Err.Configuration.Credentials(ServerKeys.Url,
                 ServerKeys.AppAppKey,
                 ServerKeys.AppSharedSecret);
         }
@@ -30,7 +30,7 @@ namespace codeRR.Client.NetStd.IntegrationTests
             }
             catch (Exception ex)
             {
-                OneTrue.Report(ex, new { Mark = true });
+                Err.Report(ex, new { Mark = true });
             }
 
             var actual = await _client.GetReport(methodName, uid);
@@ -49,7 +49,7 @@ namespace codeRR.Client.NetStd.IntegrationTests
             }
             catch (Exception ex)
             {
-                OneTrue.Report(ex);
+                Err.Report(ex);
             }
 
             var actual = await _client.CheckIfReportExists(methodName, uid);
