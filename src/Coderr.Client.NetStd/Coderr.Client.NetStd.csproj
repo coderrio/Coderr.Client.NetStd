@@ -15,8 +15,8 @@
     <RepositoryType>git</RepositoryType>
     <PackageLicenseUrl>https://raw.githubusercontent.com/coderrapp/codeRR.Client.NetStd/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://coderrapp.com</PackageProjectUrl>
-    <PackageReleaseNotes>Naming changes from "OneTrue" to just "Err"</PackageReleaseNotes>
-    <Version>1.0.1</Version>
+    <PackageReleaseNotes>Corrected an issue for report uploads due to a bug in GZipStream.</PackageReleaseNotes>
+    <Version>1.0.2</Version>
     <AssemblyName>Coderr.Client.NetStd</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -31,6 +31,7 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="System.Security.Principal" Version="4.3.0" />
+    <PackageReference Include="System.IO.Compression" Version="4.3.0" />
   </ItemGroup>
 
 </Project>

@@ -113,35 +113,31 @@ namespace codeRR.Client.Uploaders
                 });
             var jsonBytes = Encoding.UTF8.GetBytes(reportJson);
 
+
             var ms = new MemoryStream();
-            using (var gzip = new GZipStream(ms, CompressionMode.Compress, true))
+
+            using (var gzip = new GZipStream(ms, CompressionLevel.Optimal, true))
             {
                 gzip.Write(jsonBytes, 0, jsonBytes.Length);
+                gzip.Flush();
             }
-            ms.Position = 0;
+            var requestBody = ms.ToArray();
 
+            
             byte[] hash;
             var hashAlgo = new HMACSHA256(Encoding.UTF8.GetBytes(_sharedSecret));
-            if (ms.TryGetBuffer(out ArraySegment<byte> buffer))
-                hash = hashAlgo.ComputeHash(buffer.Array, buffer.Offset, buffer.Count);
-            else
-            {
-                byte[] buf2 = new byte[ms.Length];
-                ms.Read(buf2, 0, buf2.Length);
-                hash = hashAlgo.ComputeHash(buffer.Array, buffer.Offset, buffer.Count);
-            }
+            hash = hashAlgo.ComputeHash(requestBody, 0, requestBody.Length);
 
             var signature = Convert.ToBase64String(hash);
-
-            var content = new StreamContent(ms);
-            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var content = new ByteArrayContent(requestBody);
 
             // this is version 2. Need to push that on the server side first
             // and we also need to calc the signature on the JSON and not the gzipped content
-            // content.Headers.ContentEncoding.Add("gzip");
+            //content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            //content.Headers.ContentEncoding.Add("gzip");
 
-            uri = uri + "?sig=" + signature + "&v=1";
-            return new HttpRequestMessage(HttpMethod.Post, uri) {Content = content};
+            uri = uri + "?sig=" + signature + "&v=1&throw=" + (Err.Configuration.ThrowExceptions ? "1" : "0");
+            return new HttpRequestMessage(HttpMethod.Post, uri) { Content = content };
         }
 
         private void OnUploadFailed(object sender, UploadReportFailedEventArgs e)

@@ -9,7 +9,7 @@ For more information about codeRR, check the [homepage](https://coderrapp.com).
 
 # Installation
 
-1. Download and install the [codeRR server](https://github.com/coderrapp/coderr.server) or create an account at [codeRR.com](https://coderrapp.com)
+1. Download and install the [codeRR server](https://github.com/coderrapp/coderr.server) or create an account at [coderrapp.com](https://coderrapp.com)
 2. Install this client library (using nuget `coderr.client.netstd`)
 3. Configure the credentials from your codeRR account in your `Program.cs`.
 
