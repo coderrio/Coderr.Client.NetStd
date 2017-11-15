@@ -15,8 +15,8 @@
     <RepositoryType>git</RepositoryType>
     <PackageLicenseUrl>https://raw.githubusercontent.com/coderrapp/codeRR.Client.NetStd/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://coderrapp.com</PackageProjectUrl>
-    <PackageReleaseNotes>Corrected an issue for report uploads due to a bug in GZipStream.</PackageReleaseNotes>
-    <Version>1.0.2</Version>
+    <PackageReleaseNotes>Exceptions are now duplicate checked. Can also attach context collections directly to the exception.</PackageReleaseNotes>
+    <Version>1.0.3</Version>
     <AssemblyName>Coderr.Client.NetStd</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

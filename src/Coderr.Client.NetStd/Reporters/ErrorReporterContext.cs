@@ -24,6 +24,8 @@ namespace codeRR.Client.Reporters
             Exception = exception ?? throw new ArgumentNullException(nameof(exception));
             Reporter = reporter;
             ContextCollections = new List<ContextCollectionDTO>();
+
+            MoveCollectionsInException(exception, ContextCollections);
         }
 
         /// <inheritdoc />
@@ -44,5 +46,29 @@ namespace codeRR.Client.Reporters
         ///     Gets caught exception
         /// </summary>
         public Exception Exception { get; }
+
+
+        /// <summary>
+        ///     Can be used to copy collections from an exception to a collection collection ;)
+        /// </summary>
+        /// <param name="exception">Exception that might contain collections</param>
+        /// <param name="destination">target</param>
+        public static void MoveCollectionsInException(Exception exception, IList<ContextCollectionDTO> destination)
+        {
+            var keysToRemove = new List<object>();
+            foreach (var key in exception.Data.Keys)
+            {
+                var keyStr = key?.ToString();
+                if (key == null || !keyStr.StartsWith("Err."))
+                    continue;
+
+                keysToRemove.Add(key);
+                var collection = (ContextCollectionDTO)exception.Data[key];
+                destination.Add(collection);
+            }
+
+            foreach (var key in keysToRemove)
+                exception.Data.Remove(key);
+        }
     }
 }

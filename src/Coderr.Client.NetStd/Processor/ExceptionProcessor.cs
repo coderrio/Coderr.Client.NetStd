@@ -8,10 +8,11 @@ using codeRR.Client.Reporters;
 namespace codeRR.Client.Processor
 {
     /// <summary>
-    ///     Will proccess the exception to generate context info and then upload it to the server.
+    ///     Will process the exception to generate context info and then upload it to the server.
     /// </summary>
     public class ExceptionProcessor
     {
+        private const string AlreadyReportedSetting = "ErrSetting.Reported";
         private readonly CoderrConfiguration _configuration;
 
         /// <summary>
@@ -38,6 +39,8 @@ namespace codeRR.Client.Processor
         public ErrorReportDTO Build(Exception exception)
         {
             if (exception == null) throw new ArgumentNullException(nameof(exception));
+            if (IsReported(exception))
+                return null;
 
             var context = new ErrorReporterContext(null, exception);
             return Build(context);
@@ -58,6 +61,8 @@ namespace codeRR.Client.Processor
         {
             if (exception == null) throw new ArgumentNullException(nameof(exception));
             if (contextData == null) throw new ArgumentNullException(nameof(contextData));
+            if (IsReported(exception))
+                return null;
 
             var context = new ErrorReporterContext(null, exception);
             AppendCustomContextData(contextData, context.ContextCollections);
@@ -80,6 +85,11 @@ namespace codeRR.Client.Processor
         /// <exception cref="ArgumentNullException">exception;contextData</exception>
         public ErrorReportDTO Build(IErrorReporterContext context)
         {
+            if (context == null) throw new ArgumentNullException(nameof(context));
+            if (IsReported(context.Exception))
+                return null;
+
+            ErrorReporterContext.MoveCollectionsInException(context.Exception, context.ContextCollections);
             _configuration.ContextProviders.Collect(context);
             var reportId = ReportIdGenerator.Generate(context.Exception);
             var report = new ErrorReportDTO(reportId, new ExceptionDTO(context.Exception),
@@ -98,8 +108,12 @@ namespace codeRR.Client.Processor
         /// </remarks>
         public void Process(Exception exception)
         {
+            if (IsReported(exception))
+                return;
+
             var report = Build(exception);
-            UploadReportIfAllowed(report);
+            if (UploadReportIfAllowed(report))
+                MarkAsReported(exception);
         }
 
         /// <summary>
@@ -117,8 +131,13 @@ namespace codeRR.Client.Processor
         /// <seealso cref="IReportFilter" />
         public void Process(IErrorReporterContext context)
         {
+            if (IsReported(context.Exception))
+                return;
+
+            ErrorReporterContext.MoveCollectionsInException(context.Exception, context.ContextCollections);
             var report = Build(context);
-            UploadReportIfAllowed(report);
+            if (UploadReportIfAllowed(report))
+                MarkAsReported(context.Exception);
         }
 
 
@@ -132,20 +151,23 @@ namespace codeRR.Client.Processor
         ///         Will collect context info, generate a report, go through filters and finally upload it.
         ///     </para>
         ///     <para>
-        ///         Do note that reports can be discared if a filter in <c>Err.Configuration.FilterCollection</c> says so.
+        ///         Do note that reports can be discarded if a filter in <c>Err.Configuration.FilterCollection</c> says so.
         ///     </para>
         /// </remarks>
         public void Process(Exception exception, object contextData)
         {
+            if (IsReported(exception))
+                return;
+
             var report = Build(exception, contextData);
-            UploadReportIfAllowed(report);
+            if (UploadReportIfAllowed(report))
+                MarkAsReported(exception);
         }
 
 
         private static void AppendCustomContextData(object contextData, IList<ContextCollectionDTO> contextInfo)
         {
-            var dtos = contextData as IEnumerable<ContextCollectionDTO>;
-            if (dtos != null)
+            if (contextData is IEnumerable<ContextCollectionDTO> dtos)
             {
                 var arr = dtos;
                 foreach (var dto in arr)
@@ -158,12 +180,24 @@ namespace codeRR.Client.Processor
             }
         }
 
-        private void UploadReportIfAllowed(ErrorReportDTO report)
+        private bool IsReported(Exception exception)
+        {
+            return exception.Data.Contains(AlreadyReportedSetting);
+        }
+
+        private void MarkAsReported(Exception exception)
+        {
+            exception.Data[AlreadyReportedSetting] = true;
+        }
+
+        private bool UploadReportIfAllowed(ErrorReportDTO report)
         {
             var canUpload = _configuration.FilterCollection.CanUploadReport(report);
             if (!canUpload)
-                return;
+                return false;
+
             _configuration.Uploaders.Upload(report);
+            return true;
         }
     }
 }

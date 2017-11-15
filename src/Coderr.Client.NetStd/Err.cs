@@ -138,6 +138,7 @@ namespace codeRR.Client
         public static ErrorReportDTO GenerateReport(IErrorReporterContext context)
         {
             if (context == null) throw new ArgumentNullException("context");
+            ErrorReporterContext.MoveCollectionsInException(context.Exception, context.ContextCollections);
             return _exceptionProcessor.Build(context);
         }
 
@@ -176,6 +177,7 @@ namespace codeRR.Client
         public static void Report(IErrorReporterContext reporterContext, object errorContextModel)
         {
             if (reporterContext == null) throw new ArgumentNullException(nameof(reporterContext));
+            ErrorReporterContext.MoveCollectionsInException(reporterContext.Exception, reporterContext.ContextCollections);
             var collection = errorContextModel.ToContextCollection();
             reporterContext.ContextCollections.Add(collection);
             _exceptionProcessor.Process(reporterContext);

@@ -1,4 +1,5 @@
-﻿using codeRR.Client.Contracts;
+﻿using System;
+using codeRR.Client.Contracts;
 
 namespace codeRR.Client.ContextCollections
 {
@@ -28,7 +29,8 @@ namespace codeRR.Client.ContextCollections
         /// <param name="partitionKey">Key to identify a specific entity in the partition.</param>
         public void AddPartition(string partitionName, string partitionKey)
         {
-            Properties[partitionName] = partitionKey;
+            if (partitionName == null) throw new ArgumentNullException(nameof(partitionName));
+            Properties[partitionName] = partitionKey ?? throw new ArgumentNullException(nameof(partitionKey));
         }
 
         /// <summary>
@@ -43,7 +45,7 @@ namespace codeRR.Client.ContextCollections
         /// </remarks>
         public void SetTenant(string tenantId)
         {
-            Properties["Tenant"] = tenantId;
+            Properties["Tenant"] = tenantId ?? throw new ArgumentNullException(nameof(tenantId));
         }
 
         /// <summary>
@@ -58,7 +60,7 @@ namespace codeRR.Client.ContextCollections
         /// </remarks>
         public void SetUser(string userIdentifier)
         {
-            Properties["User"] = userIdentifier;
+            Properties["User"] = userIdentifier ?? throw new ArgumentNullException(nameof(userIdentifier));
         }
     }
 }

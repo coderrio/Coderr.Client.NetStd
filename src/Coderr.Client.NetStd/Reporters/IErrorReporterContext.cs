@@ -30,4 +30,5 @@ namespace codeRR.Client.Reporters
         /// </remarks>
         object Reporter { get; }
     }
+
 }
