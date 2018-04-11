@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Coderr.Client.NetStd.Contracts;
+using Coderr.Client.NetStd.Processor;
+using Coderr.Client.NetStd.Tests.Processor.Items;
 using FluentAssertions;
 using NSubstitute;
-using codeRR.Client.Contracts;
-using codeRR.Client.NetStd.Tests.Processor.Items;
-using codeRR.Client.Processor;
 using Xunit;
 
-namespace codeRR.Client.NetStd.Tests.Processor
+namespace Coderr.Client.NetStd.Tests.Processor
 {
     public class ReportFilterDispatcherTests
     {

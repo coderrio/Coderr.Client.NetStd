@@ -1,7 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
-using codeRR.Client.Config;
 
-namespace codeRR.Client.ContextCollections
+namespace Coderr.Client.NetStd.ContextCollections
 {
     /// <summary>
     ///     Context providers are used to collect additional information that can aid you in solving the error.

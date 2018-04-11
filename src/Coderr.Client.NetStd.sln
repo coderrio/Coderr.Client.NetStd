@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "codeRR.Client.NetStd", "codeRR.Client.NetStd\codeRR.Client.NetStd.csproj", "{394681F6-AAB8-4DE6-B94C-9248B4F5344F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coderr.Client.NetStd", "Coderr.Client.NetStd\Coderr.Client.NetStd.csproj", "{394681F6-AAB8-4DE6-B94C-9248B4F5344F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "codeRR.Client.NetStd.Tests", "codeRR.Client.NetStd.Tests\codeRR.Client.NetStd.Tests.csproj", "{E7B7C73E-DBC1-4D65-8078-B22A7E3AB5DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coderr.Client.NetStd.Tests", "Coderr.Client.NetStd.Tests\Coderr.Client.NetStd.Tests.csproj", "{E7B7C73E-DBC1-4D65-8078-B22A7E3AB5DB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "codeRR.Client.NetStd.Demo", "codeRR.Client.NetStd.Demo\codeRR.Client.NetStd.Demo.csproj", "{59B6F075-901F-4D71-BE92-0C7DFDE1BDF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coderr.Client.NetStd.Demo", "Coderr.Client.NetStd.Demo\Coderr.Client.NetStd.Demo.csproj", "{59B6F075-901F-4D71-BE92-0C7DFDE1BDF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "codeRR.Client.NetStd.IntegrationTests", "codeRR.Client.NetStd.IntegrationTests\codeRR.Client.NetStd.IntegrationTests.csproj", "{D7658004-E007-4743-A98A-C074AEF6E6F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coderr.Client.NetStd.IntegrationTests", "Coderr.Client.NetStd.IntegrationTests\Coderr.Client.NetStd.IntegrationTests.csproj", "{D7658004-E007-4743-A98A-C074AEF6E6F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
+using Coderr.Client.NetStd.Contracts;
 using FluentAssertions.Execution;
-using codeRR.Client.Contracts;
 
-namespace codeRR.Client.NetStd.Tests
+namespace Coderr.Client.NetStd.Tests
 {
     public static class TestExtensions
     {

@@ -1,11 +1,11 @@
 ﻿using System;
-using codeRR.Client.Config;
-using codeRR.Client.ContextCollections;
-using codeRR.Client.Contracts;
-using codeRR.Client.Processor;
-using codeRR.Client.Reporters;
+using Coderr.Client.NetStd.Config;
+using Coderr.Client.NetStd.ContextCollections;
+using Coderr.Client.NetStd.Contracts;
+using Coderr.Client.NetStd.Processor;
+using Coderr.Client.NetStd.Reporters;
 
-namespace codeRR.Client
+namespace Coderr.Client.NetStd
 {
     /// <summary>
     /// Starting point for using the codeRR client.
@@ -358,6 +358,7 @@ namespace codeRR.Client
 
             try
             {
+                EnsureApplicationVersion(dto);
                 Configuration.Uploaders.Upload(dto);
             }
             catch
@@ -365,6 +366,17 @@ namespace codeRR.Client
                 if (Configuration.ThrowExceptions)
                     throw;
             }
+        }
+
+        private static void EnsureApplicationVersion(ErrorReportDTO dto)
+        {
+            foreach (var collection in dto.ContextCollections)
+            {
+                if (collection.Properties.TryGetValue(ExceptionProcessor.AppAssemblyVersion, out var version))
+                    return;
+            }
+
+            _exceptionProcessor.AddAddemblyVersion(dto.ContextCollections);
         }
     }
 }

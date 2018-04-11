@@ -1,6 +1,6 @@
 using System.Security.Principal;
 
-namespace codeRR.Client.NetStd.Tests.Config.ContextCollections.TestObjects
+namespace Coderr.Client.NetStd.Tests.Config.ContextCollections.TestObjects
 {
     public class MyPrincipal : IPrincipal
     {

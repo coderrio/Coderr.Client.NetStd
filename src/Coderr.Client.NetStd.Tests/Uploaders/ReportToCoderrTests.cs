@@ -4,14 +4,14 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using Coderr.Client.NetStd.Contracts;
+using Coderr.Client.NetStd.Uploaders;
 using FluentAssertions;
-using codeRR.Client.Contracts;
-using codeRR.Client.Uploaders;
 using Xunit;
 
 #pragma warning disable 4014
 
-namespace codeRR.Client.NetStd.Tests.Uploaders
+namespace Coderr.Client.NetStd.Tests.Uploaders
 {
     [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
     public class UploadTocodeRRIntegrationTests

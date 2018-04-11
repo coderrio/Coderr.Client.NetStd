@@ -1,7 +1,7 @@
-﻿using codeRR.Client.Contracts;
-using codeRR.Client.Reporters;
+﻿using Coderr.Client.NetStd.Contracts;
+using Coderr.Client.NetStd.Reporters;
 
-namespace codeRR.Client.ContextCollections
+namespace Coderr.Client.NetStd.ContextCollections
 {
     /// <summary>
     ///     Collects information from a specific part of the system

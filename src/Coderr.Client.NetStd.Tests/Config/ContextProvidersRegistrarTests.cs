@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using Coderr.Client.NetStd.Config;
+using Coderr.Client.NetStd.ContextCollections;
+using Coderr.Client.NetStd.Reporters;
 using FluentAssertions;
 using NSubstitute;
-using codeRR.Client.Config;
-using codeRR.Client.ContextCollections;
-using codeRR.Client.Reporters;
 using Xunit;
 
-namespace codeRR.Client.NetStd.Tests.Config
+namespace Coderr.Client.NetStd.Tests.Config
 {
     public class ContextProvidersRegistrarTests
     {

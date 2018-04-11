@@ -3,11 +3,10 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <AssemblyName>Coderr.Client.NetStd.Demo</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\codeRR.Client.NetStd\codeRR.Client.NetStd.csproj" />
+    <ProjectReference Include="..\Coderr.Client.NetStd\Coderr.Client.NetStd.csproj" />
   </ItemGroup>
 
 </Project>

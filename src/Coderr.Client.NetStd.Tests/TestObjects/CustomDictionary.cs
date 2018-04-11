@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace codeRR.Client.NetStd.Tests.TestObjects
+namespace Coderr.Client.NetStd.Tests.TestObjects
 {
     public class CustomDictionary : IEnumerable<KeyValuePair<string, object>>
     {

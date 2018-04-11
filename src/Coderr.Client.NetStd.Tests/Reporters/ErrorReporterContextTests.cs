@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using Coderr.Client.NetStd.Reporters;
 using FluentAssertions;
-using codeRR.Client.Reporters;
 using Xunit;
 
-namespace codeRR.Client.NetStd.Tests.Reporters
+namespace Coderr.Client.NetStd.Tests.Reporters
 {
     public class ErrorReporterContextTests
     {

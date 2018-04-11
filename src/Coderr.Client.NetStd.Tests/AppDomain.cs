@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using Microsoft.Extensions.DependencyModel;
 
-namespace codeRR.Client.NetStd.Tests
+namespace Coderr.Client.NetStd.Tests
 {
     public class AppDomain
     {

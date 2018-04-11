@@ -2,7 +2,7 @@ using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace codeRR.Client.Uploaders
+namespace Coderr.Client.NetStd.Uploaders
 {
     /// <summary>
     ///     JSON.NET class which also includes all private fields.

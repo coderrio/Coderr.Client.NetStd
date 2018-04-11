@@ -3,15 +3,13 @@ using System.IO;
 using System.IO.Compression;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Coderr.Client.NetStd.Contracts;
 using Newtonsoft.Json;
-using codeRR.Client.Contracts;
 
-namespace codeRR.Client.Uploaders
+namespace Coderr.Client.NetStd.Uploaders
 {
     internal class UploadTocodeRR : IReportUploader
     {

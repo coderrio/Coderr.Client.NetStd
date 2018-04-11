@@ -1,19 +1,33 @@
 ﻿using System;
-using codeRR.Client.ContextCollections;
-using codeRR.Client.Processor;
-using codeRR.Client.Uploaders;
+using System.Collections.Generic;
+using System.Reflection;
+using Coderr.Client.NetStd.ContextCollections;
+using Coderr.Client.NetStd.Processor;
+using Coderr.Client.NetStd.Uploaders;
 
-namespace codeRR.Client.Config
+namespace Coderr.Client.NetStd.Config
 {
     /// <summary>
     ///     Configuration root object.
     /// </summary>
     public class CoderrConfiguration : IDisposable
     {
+        internal readonly List<Action<PartitionContext>> PartitionCallbacks = new List<Action<PartitionContext>>();
+
         /// <summary>
         ///     Configure how the reporting UI will interact with the user.
         /// </summary>
         private UserInteractionConfiguration _userInteraction = new UserInteractionConfiguration();
+
+        /// <summary>
+        ///     Used to be able to process error reports before they are delivered.
+        /// </summary>
+        public ExceptionPreProcessorHandler ExceptionPreProcessor;
+
+        /// <summary>
+        ///     Visit generated reports before they are sent.
+        /// </summary>
+        public ReportPreProcessorHandler ReportPreProcessor;
 
         /// <summary>
         ///     Creates a new instance of <see cref="CoderrConfiguration" />.
@@ -39,6 +53,11 @@ namespace codeRR.Client.Config
             MaxNumberOfPropertiesPerCollection = 100;
         }
 
+        /// <summary>
+        ///     Version of your application
+        /// </summary>
+        /// <see cref="AssignAssemblyVersion(System.Reflection.Assembly)" />
+        public string ApplicationVersion { get; private set; }
 
         /// <summary>
         ///     Used to add custom context info providers.
@@ -120,6 +139,51 @@ namespace codeRR.Client.Config
         public void Dispose()
         {
             Dispose(true);
+        }
+
+        /// <summary>
+        ///     Configure a callback which is used to attach partitions to the error report
+        /// </summary>
+        /// <param name="callback"></param>
+        /// <example>
+        ///     <code>
+        /// // Example for ASP.NET
+        /// Err.Configuration.AddPartition(ctx => {
+        ///    var aspNetContext = context as AspNetContext;
+        /// 
+        ///    // this check is required since different contexts are used
+        ///    // if you use multiple client libraries.
+        ///    if (aspNetContext?.HttpContext == null)
+        ///        return null;
+        /// 
+        ///    ctx.AddPartition("DeviceId", ctx.HttpContext.Session["DeviceId"]);
+        /// });
+        /// </code>
+        /// </example>
+        public void AddPartition(Action<PartitionContext> callback)
+        {
+            if (callback == null) throw new ArgumentNullException(nameof(callback));
+            PartitionCallbacks.Add(callback);
+        }
+
+        /// <summary>
+        ///     Version of the entry assembly in the user application
+        /// </summary>
+        /// <param name="assembly">Assembly containing the application version</param>
+        public void AssignAssemblyVersion(Assembly assembly)
+        {
+            ApplicationVersion = assembly.GetName().Version?.ToString();
+            if (ApplicationVersion == "0.0.0.0")
+                ApplicationVersion = null;
+        }
+
+        /// <summary>
+        ///     Your application version
+        /// </summary>
+        /// <param name="version">Assembly version, format: "1.0.0.0"</param>
+        public void AssignAssemblyVersion(string version)
+        {
+            ApplicationVersion = version;
         }
 
         /// <summary>

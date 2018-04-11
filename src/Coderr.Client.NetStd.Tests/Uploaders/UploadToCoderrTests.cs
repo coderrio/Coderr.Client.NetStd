@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
+using Coderr.Client.NetStd.Contracts;
+using Coderr.Client.NetStd.Uploaders;
 using FluentAssertions;
 using NSubstitute;
-using NSubstitute.Exceptions;
-using codeRR.Client.Config;
-using codeRR.Client.Contracts;
-using codeRR.Client.Uploaders;
 using Xunit;
 
-namespace codeRR.Client.NetStd.Tests.Uploaders
+namespace Coderr.Client.NetStd.Tests.Uploaders
 {
     public class UploadTocodeRRTests
     {

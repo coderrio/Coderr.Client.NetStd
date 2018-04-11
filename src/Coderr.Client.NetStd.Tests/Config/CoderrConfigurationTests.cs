@@ -1,11 +1,11 @@
 ﻿using System;
+using Coderr.Client.NetStd.Config;
+using Coderr.Client.NetStd.Uploaders;
 using FluentAssertions;
 using NSubstitute;
-using codeRR.Client.Config;
-using codeRR.Client.Uploaders;
 using Xunit;
 
-namespace codeRR.Client.NetStd.Tests.Config
+namespace Coderr.Client.NetStd.Tests.Config
 {
     public class CoderrConfigurationTests
     {

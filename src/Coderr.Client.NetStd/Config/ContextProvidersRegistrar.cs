@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using codeRR.Client.ContextCollections;
-using codeRR.Client.ContextCollections.Providers;
-using codeRR.Client.Contracts;
-using codeRR.Client.Reporters;
+using Coderr.Client.NetStd.ContextCollections;
+using Coderr.Client.NetStd.ContextCollections.Providers;
+using Coderr.Client.NetStd.Contracts;
+using Coderr.Client.NetStd.Reporters;
 
-namespace codeRR.Client.Config
+namespace Coderr.Client.NetStd.Config
 {
     /// <summary>
     ///     Registrar used to configure which kind of context information to provide for each unhandled exception

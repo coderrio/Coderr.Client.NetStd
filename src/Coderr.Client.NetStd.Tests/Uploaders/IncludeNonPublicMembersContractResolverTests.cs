@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
+﻿using Coderr.Client.NetStd.Tests.Uploaders.TestObjects;
+using Coderr.Client.NetStd.Uploaders;
 using FluentAssertions;
 using Newtonsoft.Json;
-using codeRR.Client.NetStd.Tests.Uploaders.TestObjects;
-using codeRR.Client.Uploaders;
 using Xunit;
 
-namespace codeRR.Client.NetStd.Tests.Uploaders
+namespace Coderr.Client.NetStd.Tests.Uploaders
 {
     public class IncludeNonPublicMembersContractResolverTests
     {

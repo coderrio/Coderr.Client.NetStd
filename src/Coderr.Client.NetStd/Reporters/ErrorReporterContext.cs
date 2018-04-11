@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using codeRR.Client.Contracts;
+using Coderr.Client.NetStd.Contracts;
+using Newtonsoft.Json;
 
-namespace codeRR.Client.Reporters
+namespace Coderr.Client.NetStd.Reporters
 {
     /// <summary>
     ///     Context supplied by error reports
@@ -59,16 +60,68 @@ namespace codeRR.Client.Reporters
             foreach (var key in exception.Data.Keys)
             {
                 var keyStr = key?.ToString();
-                if (key == null || !keyStr.StartsWith("Err."))
+                if (key == null)
                     continue;
 
-                keysToRemove.Add(key);
-                var collection = (ContextCollectionDTO)exception.Data[key];
-                destination.Add(collection);
+                if (keyStr.Equals("ErrCollections") || keyStr.StartsWith("ErrCollections."))
+                {
+                    keysToRemove.Add(key);
+                    var value = exception.Data[key];
+                    if (!(value is string valueStr))
+                        continue;
+
+                    try
+                    {
+                        var data = JsonConvert.DeserializeObject<IEnumerable<ContextCollectionDTO>>(valueStr);
+                        foreach (var col in data)
+                        {
+                            destination.Add(col);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        var items = new Dictionary<string, string>()
+                        {
+                            {"MoveCollectionsInException.Err", ex.Message},
+                            {"JSON", valueStr}
+                        };
+                        var col = new ContextCollectionDTO("ErrCollections", items);
+                        destination.Add(col);
+                    }
+
+                }
+                else if (keyStr.StartsWith("ErrCollection."))
+                {
+                    keysToRemove.Add(key);
+                    var value = exception.Data[key];
+                    if (!(value is string valueStr))
+                        continue;
+
+                    try
+                    {
+                        var col = JsonConvert.DeserializeObject<ContextCollectionDTO>(valueStr);
+                        destination.Add(col);
+                    }
+                    catch (Exception ex)
+                    {
+                        var pos = keyStr.IndexOf('.');
+                        var items = new Dictionary<string, string>()
+                        {
+                            {"MoveCollectionsInException.Err", ex.Message},
+                            {"JSON", valueStr}
+                        };
+                        var col = new ContextCollectionDTO(keyStr.Substring(pos + 1), items);
+                        destination.Add(col);
+                    }
+                }
             }
 
             foreach (var key in keysToRemove)
                 exception.Data.Remove(key);
+
+            if (exception.InnerException != null)
+                MoveCollectionsInException(exception.InnerException, destination);
+
         }
     }
 }

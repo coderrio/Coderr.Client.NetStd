@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Coderr.Client.NetStd.Config;
+using Coderr.Client.NetStd.Contracts;
+using Coderr.Client.NetStd.Processor;
+using Coderr.Client.NetStd.Reporters;
+using Coderr.Client.NetStd.Uploaders;
 using FluentAssertions;
 using NSubstitute;
-using codeRR.Client.Config;
-using codeRR.Client.Contracts;
-using codeRR.Client.Processor;
-using codeRR.Client.Reporters;
-using codeRR.Client.Uploaders;
 using Xunit;
 
-namespace codeRR.Client.NetStd.Tests.Processor
+namespace Coderr.Client.NetStd.Tests.Processor
 {
     public class ExceptionProcessorTests
     {

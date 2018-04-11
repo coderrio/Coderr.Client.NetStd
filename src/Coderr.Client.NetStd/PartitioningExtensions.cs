@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Linq;
-using codeRR.Client.ContextCollections;
-using codeRR.Client.Reporters;
+using Coderr.Client.NetStd.ContextCollections;
+using Coderr.Client.NetStd.Reporters;
 
-namespace codeRR.Client
+namespace Coderr.Client.NetStd
 {
     /// <summary>
     ///     Partitioning is used to be able to understand the effect of an exception.
     /// </summary>
-    /// <seealso cref="ErrPartitions" />
     public static class PartitioningExtensions
     {
         /// <summary>
@@ -29,14 +28,8 @@ namespace codeRR.Client
             if (partitionName == null) throw new ArgumentNullException(nameof(partitionName));
             if (partitionKey == null) throw new ArgumentNullException(nameof(partitionKey));
 
-            var collection = context.ContextCollections.FirstOrDefault(x => x.Name == ErrPartitions.NAME);
-            if (collection == null)
-            {
-                collection = new ErrPartitions();
-                context.ContextCollections.Add(collection);
-            }
-
-            collection.Properties.Add(partitionName, partitionKey);
+            var collection = context.GetCoderrCollection();
+            collection.Properties.Add($"ErrPartition.{partitionName}", partitionKey);
         }
     }
 }

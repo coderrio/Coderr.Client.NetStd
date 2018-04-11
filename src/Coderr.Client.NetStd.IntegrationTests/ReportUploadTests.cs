@@ -4,7 +4,7 @@ using FluentAssertions;
 using OneTrueError.IntegrationTests.Tools.Client;
 using Xunit;
 
-namespace codeRR.Client.NetStd.IntegrationTests
+namespace Coderr.Client.NetStd.IntegrationTests
 {
     public class ReportUploadTests
     {

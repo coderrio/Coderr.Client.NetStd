@@ -1,4 +1,4 @@
-﻿namespace codeRR.Client.NetStd.Tests.TestObjects
+﻿namespace Coderr.Client.NetStd.Tests.TestObjects
 {
     class GotParentReference
     {

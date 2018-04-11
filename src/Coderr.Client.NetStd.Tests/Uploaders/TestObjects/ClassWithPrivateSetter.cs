@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit.Sdk;
-
-namespace codeRR.Client.NetStd.Tests.Uploaders.TestObjects
+﻿namespace Coderr.Client.NetStd.Tests.Uploaders.TestObjects
 {
     public class ClassWithPrivateSetter
     {

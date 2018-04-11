@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 
-namespace codeRR.Client.Contracts
+namespace Coderr.Client.NetStd.Contracts
 {
     /// <summary>
     ///     DTO for a context collection
@@ -65,12 +65,6 @@ namespace codeRR.Client.Contracts
             Properties = properties;
         }
 
-        /// <summary>
-        ///     All Properties in the collection
-        /// </summary>
-        [DataMember]
-        public IDictionary<string, string> Properties { get; set; }
-
 
         /// <summary>
         ///     Gets name of this collection (shown for the user so that he/she can identify this collection)
@@ -87,6 +81,12 @@ namespace codeRR.Client.Contracts
                 _name = value;
             }
         }
+
+        /// <summary>
+        ///     All Properties in the collection
+        /// </summary>
+        [DataMember]
+        public IDictionary<string, string> Properties { get; set; }
 
         /// <summary>
         ///     Returns a <see cref="System.String" /> that represents this instance.

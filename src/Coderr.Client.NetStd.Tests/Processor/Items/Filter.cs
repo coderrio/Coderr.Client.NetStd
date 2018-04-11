@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using codeRR.Client.Processor;
+﻿using Coderr.Client.NetStd.Processor;
 
-namespace codeRR.Client.NetStd.Tests.Processor.Items
+namespace Coderr.Client.NetStd.Tests.Processor.Items
 {
     class Filter : IReportFilter
     {

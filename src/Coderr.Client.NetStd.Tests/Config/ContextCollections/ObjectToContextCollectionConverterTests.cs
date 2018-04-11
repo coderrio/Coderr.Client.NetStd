@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
-using System.Reflection;
+using Coderr.Client.NetStd.ContextCollections;
+using Coderr.Client.NetStd.Tests.TestObjects;
 using FluentAssertions;
 using FluentAssertions.Execution;
-using codeRR.Client.ContextCollections;
-using codeRR.Client.NetStd.Tests.TestObjects;
 using Xunit;
 
-namespace codeRR.Client.NetStd.Tests.Config.ContextCollections
+namespace Coderr.Client.NetStd.Tests.Config.ContextCollections
 {
     public class ObjectToContextCollectionConverterTests
     {

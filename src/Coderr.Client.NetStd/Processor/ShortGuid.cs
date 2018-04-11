@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace codeRR.Client.Processor
+namespace Coderr.Client.NetStd.Processor
 {
     /// <summary>
     ///     Shortens GUIDs using Base64 and convert the result to a URL friendly string.

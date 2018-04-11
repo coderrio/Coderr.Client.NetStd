@@ -1,9 +1,9 @@
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using codeRR.Client.Contracts;
+using Coderr.Client.NetStd.Contracts;
 
-namespace codeRR.Client.Uploaders
+namespace Coderr.Client.NetStd.Uploaders
 {
     internal class TestConfig
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace codeRR.Client.Uploaders
+namespace Coderr.Client.NetStd.Uploaders
 {
     /// <summary>
     ///     Thrown when the server did not find our application key

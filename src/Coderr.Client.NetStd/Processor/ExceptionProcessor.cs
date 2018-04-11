@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using codeRR.Client.Config;
-using codeRR.Client.Contracts;
-using codeRR.Client.Reporters;
+using Coderr.Client.NetStd.Config;
+using Coderr.Client.NetStd.ContextCollections;
+using Coderr.Client.NetStd.Contracts;
+using Coderr.Client.NetStd.Reporters;
 
-namespace codeRR.Client.Processor
+namespace Coderr.Client.NetStd.Processor
 {
     /// <summary>
     ///     Will process the exception to generate context info and then upload it to the server.
     /// </summary>
     public class ExceptionProcessor
     {
-        private const string AlreadyReportedSetting = "ErrSetting.Reported";
+        internal const string AlreadyReportedSetting = "ErrSetting.Reported";
+        internal const string AppAssemblyVersion = "AppAssemblyVersion";
         private readonly CoderrConfiguration _configuration;
 
         /// <summary>
@@ -86,12 +88,22 @@ namespace codeRR.Client.Processor
         public ErrorReportDTO Build(IErrorReporterContext context)
         {
             if (context == null) throw new ArgumentNullException(nameof(context));
+            if (context.Exception is CoderrClientException)
+                return null;
             if (IsReported(context.Exception))
                 return null;
-
             ErrorReporterContext.MoveCollectionsInException(context.Exception, context.ContextCollections);
+            InvokePreProcessor(context);
+
             _configuration.ContextProviders.Collect(context);
+
+            // Invoke partition collection AFTER other context info providers
+            // since those other collections might provide the property that
+            // we want to create partions on.
+            InvokePartitionCollection(context);
+
             var reportId = ReportIdGenerator.Generate(context.Exception);
+            AddAddemblyVersion(context.ContextCollections);
             var report = new ErrorReportDTO(reportId, new ExceptionDTO(context.Exception),
                 context.ContextCollections.ToArray());
             return report;
@@ -164,6 +176,19 @@ namespace codeRR.Client.Processor
                 MarkAsReported(exception);
         }
 
+        internal void AddAddemblyVersion(IList<ContextCollectionDTO> contextInfo)
+        {
+            if (_configuration.ApplicationVersion == null)
+                return;
+
+            var items = new Dictionary<string, string>
+            {
+                {"AppAssemblyVersion", _configuration.ApplicationVersion}
+            };
+
+            var col = new ContextCollectionDTO("AppVersion", items);
+            contextInfo.Add(col);
+        }
 
         private static void AppendCustomContextData(object contextData, IList<ContextCollectionDTO> contextInfo)
         {
@@ -176,8 +201,47 @@ namespace codeRR.Client.Processor
             else
             {
                 var col = contextData.ToContextCollection();
-                contextInfo.Add(col);
+                if (col.Properties.ContainsKey("ErrTags"))
+                {
+                    var coderrCollection = contextInfo.GetCoderrCollection();
+                    if (coderrCollection.Properties.TryGetValue("ErrTags", out var value))
+                    {
+                        coderrCollection.Properties["ErrTags"] = value + "," + col.Properties["ErrTags"];
+                    }
+                    else
+                    {
+                        coderrCollection.Properties["ErrTags"] = col.Properties["ErrTags"];
+                    }
+
+                    col.Properties.Remove("ErrTags");
+                }
+
+                if (col.Properties.Count > 0)
+                    contextInfo.Add(col);
             }
+        }
+
+
+        private void InvokePartitionCollection(IErrorReporterContext context)
+        {
+            var col = context.GetCoderrCollection();
+            var partitionContext = new PartitionContext(col, context);
+            foreach (var callback in _configuration.PartitionCallbacks)
+            {
+                try
+                {
+                    callback(partitionContext);
+                }
+                catch (Exception ex)
+                {
+                    col.Properties.Add("PartitionCollection.Err", $"Callback {callback} failed: {ex}");
+                }
+            }
+        }
+
+        private void InvokePreProcessor(IErrorReporterContext context)
+        {
+            Err.Configuration.ExceptionPreProcessor?.Invoke(context);
         }
 
         private bool IsReported(Exception exception)

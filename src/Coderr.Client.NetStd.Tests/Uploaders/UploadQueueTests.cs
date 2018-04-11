@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Coderr.Client.NetStd.Uploaders;
 using FluentAssertions;
-using codeRR.Client.Uploaders;
 using Xunit;
 
-namespace codeRR.Client.NetStd.Tests.Uploaders
+namespace Coderr.Client.NetStd.Tests.Uploaders
 {
     public class UploadQueueTests
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace codeRR.Client.ContextCollections.Providers
+namespace Coderr.Client.NetStd.ContextCollections.Providers
 {
     /// <summary>
     ///     Use to indicate which providers are added into the collection process per default

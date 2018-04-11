@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using Coderr.Client.NetStd.Processor;
 using FluentAssertions;
 using NCrunch.Framework;
-using codeRR.Client.Processor;
 using Xunit;
 
-namespace codeRR.Client.NetStd.Tests.Processor
+namespace Coderr.Client.NetStd.Tests.Processor
 {
     public class ReportIdGeneratorTests
     {

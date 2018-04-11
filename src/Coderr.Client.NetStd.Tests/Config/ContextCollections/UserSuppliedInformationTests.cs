@@ -1,8 +1,8 @@
-﻿using FluentAssertions;
-using codeRR.Client.ContextCollections;
+﻿using Coderr.Client.NetStd.ContextCollections;
+using FluentAssertions;
 using Xunit;
 
-namespace codeRR.Client.NetStd.Tests.Config.ContextCollections
+namespace Coderr.Client.NetStd.Tests.Config.ContextCollections
 {
     public class UserSuppliedInformationTests
     {
