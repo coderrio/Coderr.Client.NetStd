@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Coderr.Client.NetStd.Config;
 using Coderr.Client.NetStd.Contracts;
 
@@ -36,7 +37,7 @@ namespace Coderr.Client.NetStd.Uploaders
         {
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
-        
+
 
         ///// <summary>
         /////     Max number of items that may wait in queue to get uploaded.
@@ -46,7 +47,7 @@ namespace Coderr.Client.NetStd.Uploaders
         //    get => _reportQueue.MaxQueueSize;
         //    set => _reportQueue.MaxQueueSize = value;
         //}
-        
+
         /// <summary>
         ///     Register an uploader.
         /// </summary>
@@ -55,6 +56,16 @@ namespace Coderr.Client.NetStd.Uploaders
         public void Register(IReportUploader uploader)
         {
             if (uploader == null) throw new ArgumentNullException("uploader");
+
+
+            // For cases where a custom uploader is used instead of (Err.Configuration.Credentials)
+#if NETSTANDARD2_0
+            if (_configuration.ApplicationVersion == null && Assembly.GetCallingAssembly() != Assembly.GetExecutingAssembly())
+                _configuration.AssignAssemblyVersion(Assembly.GetCallingAssembly());
+#else
+            if (_configuration.ApplicationVersion == null && Assembly.GetEntryAssembly() != Assembly.GetEntryAssembly())
+                _configuration.AssignAssemblyVersion(Assembly.GetEntryAssembly());
+#endif
 
             //uploader.UploadFailed += OnUploadFailed;
             _uploaders.Add(uploader);
@@ -93,6 +104,6 @@ namespace Coderr.Client.NetStd.Uploaders
             foreach (var uploader in _uploaders)
                 uploader.UploadFeedback(dto);
         }
-        
+
     }
 }

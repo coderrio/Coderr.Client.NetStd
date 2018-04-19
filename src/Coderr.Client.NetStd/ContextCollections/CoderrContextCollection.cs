@@ -17,11 +17,11 @@ namespace Coderr.Client.NetStd.ContextCollections
         /// <returns>collection</returns>
         public static ContextCollectionDTO GetCoderrCollection(this IErrorReporterContext context)
         {
-            var collection = context.ContextCollections.FirstOrDefault(x => x.Name == "Coderr");
+            var collection = context.ContextCollections.FirstOrDefault(x => x.Name == "CoderrData");
             if (collection != null) 
                 return collection;
 
-            collection = new ContextCollectionDTO("Coderr");
+            collection = new ContextCollectionDTO("CoderrData");
             context.ContextCollections.Add(collection);
             return collection;
         }
@@ -33,11 +33,11 @@ namespace Coderr.Client.NetStd.ContextCollections
         /// <returns>collection</returns>
         public static ContextCollectionDTO GetCoderrCollection(this IList<ContextCollectionDTO> collections)
         {
-            var collection = collections.FirstOrDefault(x => x.Name == "Coderr");
+            var collection = collections.FirstOrDefault(x => x.Name == "CoderrData");
             if (collection != null) 
                 return collection;
 
-            collection = new ContextCollectionDTO("Coderr");
+            collection = new ContextCollectionDTO("CoderrData");
             collections.Add(collection);
             return collection;
         }

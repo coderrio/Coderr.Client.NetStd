@@ -181,12 +181,8 @@ namespace Coderr.Client.NetStd.Processor
             if (_configuration.ApplicationVersion == null)
                 return;
 
-            var items = new Dictionary<string, string>
-            {
-                {"AppAssemblyVersion", _configuration.ApplicationVersion}
-            };
-
-            var col = new ContextCollectionDTO("AppVersion", items);
+            var col = contextInfo.GetCoderrCollection();
+            col.Properties.Add("AppAssemblyVersion", _configuration.ApplicationVersion);
             contextInfo.Add(col);
         }
 

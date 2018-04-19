@@ -197,6 +197,17 @@ namespace Coderr.Client.NetStd.Config
             if (oneTrueHost == null) throw new ArgumentNullException("oneTrueHost");
             if (appKey == null) throw new ArgumentNullException("appKey");
             if (sharedSecret == null) throw new ArgumentNullException("sharedSecret");
+
+            if (ApplicationVersion == null)
+            {
+#if NETSTANDARD2_0
+                AssignAssemblyVersion(Assembly.GetCallingAssembly());
+#else
+                AssignAssemblyVersion(Assembly.GetEntryAssembly());
+#endif
+            }
+                
+
             Uploaders.Register(new UploadTocodeRR(oneTrueHost, appKey, sharedSecret));
         }
 
