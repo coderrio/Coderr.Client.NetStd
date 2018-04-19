@@ -6,10 +6,10 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using Coderr.Client.NetStd.Contracts;
+using Coderr.Client.Contracts;
 using Newtonsoft.Json;
 
-namespace Coderr.Client.NetStd.Uploaders
+namespace Coderr.Client.Uploaders
 {
     internal class UploadTocodeRR : IReportUploader
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using Coderr.Client.NetStd.ContextCollections;
+using Coderr.Client.ContextCollections;
 using FluentAssertions;
 using OneTrueError.IntegrationTests.Tools.Client;
 using Xunit;

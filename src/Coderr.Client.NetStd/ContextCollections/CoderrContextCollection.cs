@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Coderr.Client.NetStd.Contracts;
-using Coderr.Client.NetStd.Reporters;
+using Coderr.Client.Contracts;
+using Coderr.Client.Reporters;
 
-namespace Coderr.Client.NetStd.ContextCollections
+namespace Coderr.Client.ContextCollections
 {
     /// <summary>
     /// Extensions to get the Coderr collection that we store meta data in

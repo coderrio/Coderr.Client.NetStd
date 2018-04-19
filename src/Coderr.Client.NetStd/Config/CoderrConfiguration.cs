@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Coderr.Client.NetStd.ContextCollections;
-using Coderr.Client.NetStd.Processor;
-using Coderr.Client.NetStd.Uploaders;
+using Coderr.Client.ContextCollections;
+using Coderr.Client.Processor;
+using Coderr.Client.Uploaders;
 
-namespace Coderr.Client.NetStd.Config
+namespace Coderr.Client.Config
 {
     /// <summary>
     ///     Configuration root object.

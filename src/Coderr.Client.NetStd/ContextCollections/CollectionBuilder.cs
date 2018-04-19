@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Security.Principal;
-using Coderr.Client.NetStd.Contracts;
+using Coderr.Client.Contracts;
 
-namespace Coderr.Client.NetStd.ContextCollections
+namespace Coderr.Client.ContextCollections
 {
     /// <summary>
     ///     Can build collections for common context data.

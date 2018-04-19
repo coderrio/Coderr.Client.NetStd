@@ -1,11 +1,11 @@
 ﻿using System;
-using Coderr.Client.NetStd.Config;
-using Coderr.Client.NetStd.ContextCollections;
-using Coderr.Client.NetStd.Contracts;
-using Coderr.Client.NetStd.Processor;
-using Coderr.Client.NetStd.Reporters;
+using Coderr.Client.Config;
+using Coderr.Client.ContextCollections;
+using Coderr.Client.Contracts;
+using Coderr.Client.Processor;
+using Coderr.Client.Reporters;
 
-namespace Coderr.Client.NetStd
+namespace Coderr.Client
 {
     /// <summary>
     /// Starting point for using the codeRR client.

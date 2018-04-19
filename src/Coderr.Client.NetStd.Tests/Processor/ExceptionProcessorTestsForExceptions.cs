@@ -1,7 +1,7 @@
 ﻿using System;
-using Coderr.Client.NetStd.Config;
-using Coderr.Client.NetStd.Processor;
+using Coderr.Client.Config;
 using Coderr.Client.NetStd.Tests.Processor.Helpers;
+using Coderr.Client.Processor;
 using FluentAssertions;
 using NSubstitute;
 using Xunit;

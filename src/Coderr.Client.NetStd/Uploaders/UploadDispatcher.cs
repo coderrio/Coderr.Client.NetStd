@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Coderr.Client.NetStd.Config;
-using Coderr.Client.NetStd.Contracts;
+using Coderr.Client.Config;
+using Coderr.Client.Contracts;
 
-namespace Coderr.Client.NetStd.Uploaders
+namespace Coderr.Client.Uploaders
 {
     /// <summary>
     ///     Invokes all uploaders for every report.
