@@ -26,7 +26,7 @@ namespace Coderr.Client.NetStd.Tests.Processor
             var processor = new ExceptionProcessor(config);
             processor.Process(ctx);
 
-            upl.Report.GetCollectionProperty("Coderr", "ErrPartition.Id").Should().Be("42");
+            upl.Report.GetCollectionProperty("CoderrData", "ErrPartition.Id").Should().Be("42");
         }
     }
 }
