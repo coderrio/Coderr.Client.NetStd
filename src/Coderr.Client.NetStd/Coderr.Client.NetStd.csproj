@@ -4,9 +4,10 @@
     <TargetFrameworks>netstandard1.5;netstandard2.0</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Coderr.Client.NetStd.xml</DocumentationFile>
+    <RootNamespace>Coderr.Client</RootNamespace>
 
-    <PackageReleaseNotes>All Coderr properties are now stored in the same collection.</PackageReleaseNotes>
-    <Version>1.1.1</Version>
+    <PackageReleaseNotes>Oops, made a mistake with the namespace.</PackageReleaseNotes>
+    <Version>1.1.2</Version>
   </PropertyGroup>
 
   <PropertyGroup>
