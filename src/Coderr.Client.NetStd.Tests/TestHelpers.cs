@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Coderr.Client.NetStd.Contracts;
+using Coderr.Client.Contracts;
 using FluentAssertions.Execution;
 
 namespace Coderr.Client.NetStd.Tests

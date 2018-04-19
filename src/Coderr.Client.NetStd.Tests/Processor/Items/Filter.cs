@@ -1,4 +1,4 @@
-﻿using Coderr.Client.NetStd.Processor;
+﻿using Coderr.Client.Processor;
 
 namespace Coderr.Client.NetStd.Tests.Processor.Items
 {

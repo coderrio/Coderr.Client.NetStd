@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace Coderr.Client.NetStd.Processor
+namespace Coderr.Client.Processor
 {
     /// <summary>
     ///     Contains the processor which analyzes the exception and builds context information.

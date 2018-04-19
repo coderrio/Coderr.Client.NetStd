@@ -1,4 +1,4 @@
-﻿namespace Coderr.Client.NetStd.Config
+﻿namespace Coderr.Client.Config
 {
     /// <summary>
     ///     Adopts the user interface and the reporting flow.

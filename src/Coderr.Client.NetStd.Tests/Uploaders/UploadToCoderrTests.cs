@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Coderr.Client.NetStd.Contracts;
-using Coderr.Client.NetStd.Uploaders;
+using Coderr.Client.Contracts;
+using Coderr.Client.Uploaders;
 using FluentAssertions;
 using NSubstitute;
 using Xunit;

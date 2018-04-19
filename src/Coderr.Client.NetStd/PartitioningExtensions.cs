@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Linq;
-using Coderr.Client.NetStd.ContextCollections;
-using Coderr.Client.NetStd.Reporters;
+using Coderr.Client.ContextCollections;
+using Coderr.Client.Reporters;
 
-namespace Coderr.Client.NetStd
+namespace Coderr.Client
 {
     /// <summary>
     ///     Partitioning is used to be able to understand the effect of an exception.

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 
-namespace Coderr.Client.NetStd.Contracts
+namespace Coderr.Client.Contracts
 {
     /// <summary>
     ///     DTO for a context collection

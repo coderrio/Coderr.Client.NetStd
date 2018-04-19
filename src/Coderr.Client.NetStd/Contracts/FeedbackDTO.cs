@@ -1,6 +1,6 @@
-﻿using Coderr.Client.NetStd.Processor;
+﻿using Coderr.Client.Processor;
 
-namespace Coderr.Client.NetStd.Contracts
+namespace Coderr.Client.Contracts
 {
     /// <summary>
     ///     To be able to write feedback after the actual error have been sent.

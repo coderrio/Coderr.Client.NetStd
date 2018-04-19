@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Coderr.Client.NetStd
+namespace Coderr.Client
 {
     /// <summary>
     ///     Exception thrown in the codeRR library

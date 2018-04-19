@@ -1,8 +1,8 @@
 ﻿using System;
-using Coderr.Client.NetStd.Contracts;
-using Coderr.Client.NetStd.Reporters;
+using Coderr.Client.Contracts;
+using Coderr.Client.Reporters;
 
-namespace Coderr.Client.NetStd.Config
+namespace Coderr.Client.Config
 {
     /// <summary>
     ///     Context used for the partition callback.

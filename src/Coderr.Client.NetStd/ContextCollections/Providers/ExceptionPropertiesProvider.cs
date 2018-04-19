@@ -1,8 +1,8 @@
 ﻿using System;
-using Coderr.Client.NetStd.Contracts;
-using Coderr.Client.NetStd.Reporters;
+using Coderr.Client.Contracts;
+using Coderr.Client.Reporters;
 
-namespace Coderr.Client.NetStd.ContextCollections.Providers
+namespace Coderr.Client.ContextCollections.Providers
 {
     /// <summary>
     ///     Goes through the exception and maps all custom properties. Will be added into a collection called

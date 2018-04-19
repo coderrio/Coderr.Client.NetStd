@@ -1,4 +1,4 @@
-﻿using Coderr.Client.NetStd.ContextCollections;
+﻿using Coderr.Client.ContextCollections;
 using FluentAssertions;
 using Xunit;
 

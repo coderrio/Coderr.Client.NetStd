@@ -1,6 +1,6 @@
 ﻿using System;
-using Coderr.Client.NetStd.Config;
-using Coderr.Client.NetStd.Uploaders;
+using Coderr.Client.Config;
+using Coderr.Client.Uploaders;
 using FluentAssertions;
 using NSubstitute;
 using Xunit;

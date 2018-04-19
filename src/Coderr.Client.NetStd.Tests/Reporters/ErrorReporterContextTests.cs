@@ -1,5 +1,5 @@
 ﻿using System;
-using Coderr.Client.NetStd.Reporters;
+using Coderr.Client.Reporters;
 using FluentAssertions;
 using Xunit;
 

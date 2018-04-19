@@ -1,6 +1,6 @@
-﻿using Coderr.Client.NetStd.Reporters;
+﻿using Coderr.Client.Reporters;
 
-namespace Coderr.Client.NetStd.Config
+namespace Coderr.Client.Config
 {
     /// <summary>
     /// Used to be able to process exceptions before they are converted into DTOs

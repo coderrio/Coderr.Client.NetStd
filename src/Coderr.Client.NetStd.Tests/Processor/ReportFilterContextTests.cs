@@ -1,6 +1,6 @@
 ﻿using System;
-using Coderr.Client.NetStd.Contracts;
-using Coderr.Client.NetStd.Processor;
+using Coderr.Client.Contracts;
+using Coderr.Client.Processor;
 using FluentAssertions;
 using Xunit;
 

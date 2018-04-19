@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Coderr.Client.NetStd.Contracts;
+using Coderr.Client.Contracts;
 
-namespace Coderr.Client.NetStd.Reporters
+namespace Coderr.Client.Reporters
 {
     /// <summary>
     ///     contains context information which can be used during collection such as <c>HttpContext</c> (if the exception was

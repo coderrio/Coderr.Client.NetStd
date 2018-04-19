@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using Coderr.Client.NetStd.Config;
-using Coderr.Client.NetStd.ContextCollections;
-using Coderr.Client.NetStd.Reporters;
+using Coderr.Client.Config;
+using Coderr.Client.ContextCollections;
+using Coderr.Client.Reporters;
 using FluentAssertions;
 using NSubstitute;
 using Xunit;

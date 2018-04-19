@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Coderr.Client.NetStd.Uploaders
+namespace Coderr.Client.Uploaders
 {
     /// <summary>
     ///     Purpose of this class is to take care of DTO queing to be able to upload reports in a structured manner.

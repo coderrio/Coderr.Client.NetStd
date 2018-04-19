@@ -1,6 +1,6 @@
-﻿using Coderr.Client.NetStd.Contracts;
-using Coderr.Client.NetStd.Processor;
+﻿using Coderr.Client.Contracts;
 using Coderr.Client.NetStd.Tests.Processor.Items;
+using Coderr.Client.Processor;
 using FluentAssertions;
 using NSubstitute;
 using Xunit;

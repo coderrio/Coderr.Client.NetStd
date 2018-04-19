@@ -1,6 +1,6 @@
-﻿using Coderr.Client.NetStd.Config;
-using Coderr.Client.NetStd.Contracts;
-using Coderr.Client.NetStd.Uploaders;
+﻿using Coderr.Client.Config;
+using Coderr.Client.Contracts;
+using Coderr.Client.Uploaders;
 using NSubstitute;
 using Xunit;
 

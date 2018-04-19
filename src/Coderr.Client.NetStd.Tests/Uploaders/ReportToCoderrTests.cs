@@ -4,8 +4,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using Coderr.Client.NetStd.Contracts;
-using Coderr.Client.NetStd.Uploaders;
+using Coderr.Client.Contracts;
+using Coderr.Client.Uploaders;
 using FluentAssertions;
 using Xunit;
 

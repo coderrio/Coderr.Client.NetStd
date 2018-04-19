@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
 
-namespace Coderr.Client.NetStd.Contracts
+namespace Coderr.Client.Contracts
 {
     /// <summary>
     ///     Model used to wrap all information from an exception.

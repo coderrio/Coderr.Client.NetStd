@@ -1,6 +1,6 @@
 ﻿using System;
-using Coderr.Client.NetStd.Contracts;
-using Coderr.Client.NetStd.Uploaders;
+using Coderr.Client.Contracts;
+using Coderr.Client.Uploaders;
 
 namespace Coderr.Client.NetStd.Tests.Processor.Helpers
 {

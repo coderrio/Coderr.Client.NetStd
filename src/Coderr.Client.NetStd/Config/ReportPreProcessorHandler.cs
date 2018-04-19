@@ -1,6 +1,6 @@
-﻿using Coderr.Client.NetStd.Contracts;
+﻿using Coderr.Client.Contracts;
 
-namespace Coderr.Client.NetStd.Config
+namespace Coderr.Client.Config
 {
     /// <summary>
     /// Used to be able to process error reports before they are delivered.

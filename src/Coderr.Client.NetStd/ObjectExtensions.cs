@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using Coderr.Client.NetStd.ContextCollections;
-using Coderr.Client.NetStd.Contracts;
+using Coderr.Client.ContextCollections;
+using Coderr.Client.Contracts;
 
-namespace Coderr.Client.NetStd
+namespace Coderr.Client
 {
     /// <summary>
     ///     Extension methods for objects.

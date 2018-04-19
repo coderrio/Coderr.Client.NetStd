@@ -1,5 +1,5 @@
 ﻿using System;
-using Coderr.Client.NetStd.Processor;
+using Coderr.Client.Processor;
 using FluentAssertions;
 using NCrunch.Framework;
 using Xunit;

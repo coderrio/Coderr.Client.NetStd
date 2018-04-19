@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Security.Principal;
-using Coderr.Client.NetStd.Contracts;
+using Coderr.Client.Contracts;
 
-namespace Coderr.Client.NetStd.ContextCollections.Providers
+namespace Coderr.Client.ContextCollections.Providers
 {
     /// <summary>
     ///     Carries the user credentials to the server.

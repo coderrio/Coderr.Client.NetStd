@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
-using Coderr.Client.NetStd.ContextCollections;
+using Coderr.Client.ContextCollections;
 using Coderr.Client.NetStd.Tests.TestObjects;
 using FluentAssertions;
 using FluentAssertions.Execution;

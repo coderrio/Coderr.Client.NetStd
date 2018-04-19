@@ -1,6 +1,6 @@
 using System;
 
-namespace Coderr.Client.NetStd.Uploaders
+namespace Coderr.Client.Uploaders
 {
     /// <summary>
     /// Queue used to upload reports to an analyser.
