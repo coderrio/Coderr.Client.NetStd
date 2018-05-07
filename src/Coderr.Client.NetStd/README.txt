@@ -1,38 +1,67 @@
-﻿codeRR - .NET Standard Client
-=====================================
+﻿Coderr .NET Standard library
+==============================
 
-Congratulations on taking the first step toward a more efficient exception handling.
+Welcome to Coderr! 
 
-Now you need to either download and install the open source server: https://github.com/coderrapp/codeRR.Server/
-.. or create an account at https://coderrapp.com.
+This library is the client library of Coderr. It allows you to manually report exceptions to the Coderr server.
+If you would like to use automated reporting, install one of the other Coderr nuget packages.
 
-Once done, log into the server to find configuration instructions.
-(Or read the articles in our documentation: https://coderrapp.com/documentation)
+This library doesn't process the generated information. 
+Information processing is done by the Coderr server which you will need to install.
 
-Questions & Feedback:
-http://discuss.coderrapp.com/
+For a server with full functionality, we recommend you to use our hosted service at https://coderr.io/live. 
+But you can also use and install the open source server version from https://github.com/coderrio/coderr.server.
 
-Source code:
-https://github.com/coderrapp/codeRR.Client.NetStd
+For any questions that you might have, please use our forum at http://discuss.coderr.io. 
+At the forum, we will try to answer questions as fast as we can and post answers to questions that have already been asked. Don't hesitate to use it! 
+
+Configuration
+=============
+
+Start by configuring the connection to the codeRR server. The code below is typically added in 
+your global.asax, Program.cs or Startup.cs. The configuration settings is found either in codeRR Live or 
+in your installed codeRR server.
+
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+
+            // codeRR configuration
+            var uri = new Uri("https://report.coderr.io/");
+            Err.Configuration.Credentials(uri,
+                "yourAppKey",
+                "yourSharedSecret");
+
+            // the usual stuff
+			// [...]
+        }
+    }
+
+Want automated exception reporting? Install one of the integration packages instead. 
+They are listed here: https://github.com/coderrio/coderr.client/
 
 
-Reporting exceptions manually
+Reporting exceptions
 ====================
 
-This is one of many many examples ;)
+This is one of many examples:
 
-public void SomeMethod(int userId, int postId)
-{
-  try
-  {
-     // [...some code...]
-  }
-  catch (Exception ex)
-  {
-    Err.Report(ex, new { userId, postId });
-  }
-}
+    public void SomeMethod(PostViewModel model)
+    {
+        try
+        {
+            _somService.Execute(model);
+        }
+        catch (Exception ex)
+        {
+            Err.Report(ex, model);
 
-For automated reported, download one of the integration libraries for MVC, WebApi2, WCF etc.
+            //some custom handling
+        }
 
-Find more examples and information in our documentation. 
+        // some other code here...
+    }
+
+Again for questions, go to http://discuss.coderr.io
+Additional documentation can be found at https://coderr.io/documentation/

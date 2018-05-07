@@ -24,8 +24,7 @@ namespace Coderr.Client.Processor
         /// <exception cref="ArgumentNullException">configuration</exception>
         public ExceptionProcessor(CoderrConfiguration configuration)
         {
-            if (configuration == null) throw new ArgumentNullException("configuration");
-            _configuration = configuration;
+            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
         /// <summary>
@@ -182,7 +181,7 @@ namespace Coderr.Client.Processor
                 return;
 
             var col = contextInfo.GetCoderrCollection();
-            col.Properties.Add("AppAssemblyVersion", _configuration.ApplicationVersion);
+            col.Properties.Add(AppAssemblyVersion, _configuration.ApplicationVersion);
             contextInfo.Add(col);
         }
 
