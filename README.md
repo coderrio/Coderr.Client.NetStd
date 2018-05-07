@@ -1,7 +1,7 @@
 Integration library for NET Standard 1.5 and above
 ==========================
 
-[![VSTS](https://coderr.visualstudio.com/_apis/public/build/definitions/75570083-b1ef-4e78-88e2-5db4982f756c/3/badge)]() [![NuGet](https://img.shields.io/nuget/dt/codeRR.Client.NetStd.svg?style=flat-square)]()
+[![VSTS](https://1tcompany.visualstudio.com/_apis/public/build/definitions/75570083-b1ef-4e78-88e2-5db4982f756c/3/badge)]() [![NuGet](https://img.shields.io/nuget/dt/Coderr.Client.NetStd.svg?style=flat-square)]()
 
 This client library is used to manually report exceptions to codeRR (`OneTrue.Report(exception)`).
 
