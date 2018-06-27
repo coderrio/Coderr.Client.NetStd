@@ -119,6 +119,8 @@ namespace Coderr.Client.Processor
         /// </remarks>
         public void Process(Exception exception)
         {
+            if (exception == null) throw new ArgumentNullException(nameof(exception));
+
             if (IsReported(exception))
                 return;
 
@@ -142,6 +144,8 @@ namespace Coderr.Client.Processor
         /// <seealso cref="IReportFilter" />
         public void Process(IErrorReporterContext context)
         {
+            if (context == null) throw new ArgumentNullException(nameof(context));
+
             if (IsReported(context.Exception))
                 return;
 
@@ -167,6 +171,7 @@ namespace Coderr.Client.Processor
         /// </remarks>
         public void Process(Exception exception, object contextData)
         {
+            if (exception == null) throw new ArgumentNullException(nameof(exception));
             if (IsReported(exception))
                 return;
 
@@ -251,6 +256,8 @@ namespace Coderr.Client.Processor
 
         private bool UploadReportIfAllowed(ErrorReportDTO report)
         {
+            if (report == null) throw new ArgumentNullException(nameof(report));
+
             var canUpload = _configuration.FilterCollection.CanUploadReport(report);
             if (!canUpload)
                 return false;

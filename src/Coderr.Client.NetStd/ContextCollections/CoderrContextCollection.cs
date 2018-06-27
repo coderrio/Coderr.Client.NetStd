@@ -41,5 +41,24 @@ namespace Coderr.Client.ContextCollections
             collections.Add(collection);
             return collection;
         }
+
+        
+        public static void AddTag(this IList<ContextCollectionDTO> collections, string tagName)
+        {
+            var coderrCollection = GetCoderrCollection(collections);
+            if (!coderrCollection.Properties.TryGetValue("ErrTags", out var tags))
+            {
+                coderrCollection.Properties["ErrTags"] = tagName;
+                return;
+            }
+
+            if (!tags.Contains(tagName))
+                coderrCollection.Properties["ErrTags"] = tags + "," + tagName;
+        }
+
+        public static void AddTag(this IErrorReporterContext context, string tagName)
+        {
+            AddTag(context.ContextCollections, tagName);
+        }
     }
 }
