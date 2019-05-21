@@ -104,7 +104,10 @@ namespace Coderr.Client.Processor
             var reportId = ReportIdGenerator.Generate(context.Exception);
             AddAddemblyVersion(context.ContextCollections);
             var report = new ErrorReportDTO(reportId, new ExceptionDTO(context.Exception),
-                context.ContextCollections.ToArray());
+                context.ContextCollections.ToArray())
+            {
+                EnvironmentName = Err.Configuration.EnvironmentName
+            };
             return report;
         }
 

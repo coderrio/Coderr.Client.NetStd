@@ -82,6 +82,11 @@ namespace Coderr.Client.Contracts
         public string ReportVersion { get; }
 
         /// <summary>
+        /// Application environment (like "Test" and "Production")
+        /// </summary>
+        public string EnvironmentName { get; set; }
+
+        /// <summary>
         ///     Add an collection to the model
         /// </summary>
         /// <param name="collection">Collection of contextual information which can be used to aid in solving the error.</param>

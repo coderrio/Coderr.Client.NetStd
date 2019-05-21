@@ -20,6 +20,24 @@ namespace Coderr.Client
         static Err()
         {
             _exceptionProcessor = new ExceptionProcessor(Configuration);
+            try
+            {
+                var value = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")
+                            ?? Environment.GetEnvironmentVariable("APPLICATION_ENVIRONMENT");
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    Configuration.EnvironmentName = value;
+                    return;
+                }
+
+                if (Debugger.IsAttached)
+                    Configuration.EnvironmentName = "Development";
+            }
+            // ReSharper disable once EmptyGeneralCatchClause
+            catch
+            {
+
+            }
         }
 
         /// <summary>

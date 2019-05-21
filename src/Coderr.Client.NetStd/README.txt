@@ -18,9 +18,9 @@ At the forum, we will try to answer questions as fast as we can and post answers
 Configuration
 =============
 
-Start by configuring the connection to the codeRR server. The code below is typically added in 
-your global.asax, Program.cs or Startup.cs. The configuration settings is found either in codeRR Live or 
-in your installed codeRR server.
+Start by configuring the connection to the Coderr server. The code below is typically added in 
+your global.asax, Program.cs or Startup.cs. The configuration settings is found either in Coderr Live or 
+in your locally installed Coderr server.
 
     public class Program
     {

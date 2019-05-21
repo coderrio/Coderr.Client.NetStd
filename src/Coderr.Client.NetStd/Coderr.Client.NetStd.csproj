@@ -6,8 +6,8 @@
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Coderr.Client.NetStd.xml</DocumentationFile>
     <RootNamespace>Coderr.Client</RootNamespace>
 
-    <PackageReleaseNotes>Added support for Err.ReportLogicError()</PackageReleaseNotes>
-    <Version>1.2.0</Version>
+    <PackageReleaseNotes>Added support for application environment tracking</PackageReleaseNotes>
+    <Version>1.2.1</Version>
   </PropertyGroup>
 
   <PropertyGroup>

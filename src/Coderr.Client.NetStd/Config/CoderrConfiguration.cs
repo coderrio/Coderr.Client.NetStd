@@ -65,6 +65,11 @@ namespace Coderr.Client.Config
         public ContextProvidersRegistrar ContextProviders { get; } = new ContextProvidersRegistrar();
 
         /// <summary>
+        /// Which environment are we running in? Dev, Production etc.
+        /// </summary>
+        public string EnvironmentName { get; set; }
+
+        /// <summary>
         ///     Used to decide which reports can be uploaded.
         /// </summary>
         /// <remarks>
