@@ -6,8 +6,8 @@
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Coderr.Client.NetStd.xml</DocumentationFile>
     <RootNamespace>Coderr.Client</RootNamespace>
 
-    <PackageReleaseNotes>Added support for application environment tracking</PackageReleaseNotes>
-    <Version>1.2.1</Version>
+    <PackageReleaseNotes>Added helpers for customizing the UI through the client libraries.</PackageReleaseNotes>
+    <Version>1.2.2</Version>
   </PropertyGroup>
 
   <PropertyGroup>
