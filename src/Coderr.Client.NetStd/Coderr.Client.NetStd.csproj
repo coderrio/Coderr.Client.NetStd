@@ -6,8 +6,8 @@
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Coderr.Client.NetStd.xml</DocumentationFile>
     <RootNamespace>Coderr.Client</RootNamespace>
 
-    <PackageReleaseNotes>Added helpers for customizing the UI through the client libraries.</PackageReleaseNotes>
-    <Version>1.2.2</Version>
+    <PackageReleaseNotes>Tweak of previous commit.</PackageReleaseNotes>
+    <Version>1.2.3</Version>
   </PropertyGroup>
 
   <PropertyGroup>

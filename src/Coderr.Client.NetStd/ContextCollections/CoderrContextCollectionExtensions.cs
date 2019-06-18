@@ -77,7 +77,7 @@ namespace Coderr.Client.ContextCollections
             }
 
             if (!values.Contains(value))
-                coderrCollection.Properties[CoderrCollectionProperties.HighlightProperties] = $"{values},{values}";
+                coderrCollection.Properties[CoderrCollectionProperties.HighlightProperties] = $"{values},{value}";
         }
 
 
@@ -86,14 +86,14 @@ namespace Coderr.Client.ContextCollections
             var coderrCollection = GetCoderrCollection(collections);
 
             var value = contextCollectionName;
-            if (!coderrCollection.Properties.TryGetValue(CoderrCollectionProperties.HighlightProperties, out var values))
+            if (!coderrCollection.Properties.TryGetValue(CoderrCollectionProperties.HighlightCollection, out var values))
             {
-                coderrCollection.Properties[CoderrCollectionProperties.HighlightProperties] = value;
+                coderrCollection.Properties[CoderrCollectionProperties.HighlightCollection] = value;
                 return;
             }
 
             if (!values.Contains(value))
-                coderrCollection.Properties[CoderrCollectionProperties.HighlightProperties] = $"{values},{values}";
+                coderrCollection.Properties[CoderrCollectionProperties.HighlightCollection] = $"{values},{value}";
         }
 
 
