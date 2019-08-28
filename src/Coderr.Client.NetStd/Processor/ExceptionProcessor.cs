@@ -11,7 +11,7 @@ namespace Coderr.Client.Processor
     /// <summary>
     ///     Will process the exception to generate context info and then upload it to the server.
     /// </summary>
-    public class ExceptionProcessor
+    public class ExceptionProcessor : IExceptionProcessor
     {
         internal const string AlreadyReportedSetting = "ErrSetting.Reported";
         internal const string AppAssemblyVersion = "AppAssemblyVersion";
