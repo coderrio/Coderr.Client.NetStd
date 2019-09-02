@@ -16,17 +16,13 @@ namespace Coderr.Client.Contracts
         /// <param name="contextCollections">The context collections.</param>
         public ErrorReportDTO(string reportId, ExceptionDTO exception, ContextCollectionDTO[] contextCollections)
         {
-            if (reportId == null) throw new ArgumentNullException("reportId");
-            if (exception == null) throw new ArgumentNullException("exception");
-            if (contextCollections == null) throw new ArgumentNullException("contextCollections");
+            if (reportId == null) throw new ArgumentNullException(nameof(reportId));
             if (reportId.Contains(" ") || reportId.Length > 30)
                 throw new ArgumentException(
-                    string.Format(
-                        "reportId must be 30 or less characters and should be alphanumeric only. Your id '{0}' is {1} chars.",
-                        reportId, reportId.Length));
+                    $"reportId must be 30 or less characters and should be alphanumeric only. Your id '{reportId}' is {reportId.Length} chars.");
 
-            ContextCollections = contextCollections;
-            Exception = exception;
+            ContextCollections = contextCollections ?? throw new ArgumentNullException(nameof(contextCollections));
+            Exception = exception ?? throw new ArgumentNullException(nameof(exception));
             ReportId = reportId;
             ReportVersion = "1.0";
             CreatedAtUtc = DateTime.UtcNow;
@@ -87,13 +83,18 @@ namespace Coderr.Client.Contracts
         public string EnvironmentName { get; set; }
 
         /// <summary>
+        /// Name of collection to show per default in the UI.
+        /// </summary>
+        public string HighlightCollection { get; set; }
+
+        /// <summary>
         ///     Add an collection to the model
         /// </summary>
         /// <param name="collection">Collection of contextual information which can be used to aid in solving the error.</param>
         /// <exception cref="System.ArgumentNullException">collection</exception>
         public void Add(ContextCollectionDTO collection)
         {
-            if (collection == null) throw new ArgumentNullException("collection");
+            if (collection == null) throw new ArgumentNullException(nameof(collection));
 
             var col = new List<ContextCollectionDTO>(ContextCollections) {collection};
             ContextCollections = col.ToArray();
@@ -107,7 +108,7 @@ namespace Coderr.Client.Contracts
         /// </returns>
         public override string ToString()
         {
-            return ReportId + " (" + Exception.Message + ")";
+            return $"{ReportId} ({Exception.Message})";
         }
     }
 }

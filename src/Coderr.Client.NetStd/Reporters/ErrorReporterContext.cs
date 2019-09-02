@@ -33,16 +33,10 @@ namespace Coderr.Client.Reporters
         public IList<ContextCollectionDTO> ContextCollections { get; }
 
         /// <summary>
-        ///     Gets class which is sending the report
+        ///     Object that discovered the error.
         /// </summary>
-        /// <remarks>
-        /// <para>
-        /// 
-        /// </para>
-        /// </remarks>
         public object Reporter { get; }
-
-
+        
         /// <summary>
         ///     Gets caught exception
         /// </summary>
