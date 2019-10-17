@@ -29,7 +29,7 @@ namespace Coderr.Client.NetStd.Tests.Uploaders
         {
             var uri = new Uri("http://localhost/receiver/");
 
-            Action actual = () => new UploadTocodeRR(uri, "ada", "cesar", _config);
+            Action actual = () => new UploadToCoderr(uri, "ada", "cesar", _config);
 
             actual.ShouldThrow<ArgumentException>();
         }
@@ -47,7 +47,7 @@ namespace Coderr.Client.NetStd.Tests.Uploaders
             };
             
 
-            var sut = new UploadTocodeRR(uri, "ada", "cesar", _config);
+            var sut = new UploadToCoderr(uri, "ada", "cesar", _config);
             sut.UploadReport(report);
 
             msg.RequestUri.ToString().EndsWith("/");
@@ -60,7 +60,7 @@ namespace Coderr.Client.NetStd.Tests.Uploaders
             var uri = new Uri("http://localhost");
             _config.QueueReportsAccessor = () => true;
 
-            var sut = new UploadTocodeRR(uri, "ada", "cesar", _config);
+            var sut = new UploadToCoderr(uri, "ada", "cesar", _config);
             sut.UploadReport(report);
 
             _config.ReportQueue.Received().Enqueue(Arg.Any<ErrorReportDTO>());
@@ -73,7 +73,7 @@ namespace Coderr.Client.NetStd.Tests.Uploaders
             var uri = new Uri("http://localhost");
             _config.QueueReportsAccessor = () => true;
 
-            var sut = new UploadTocodeRR(uri, "ada", "cesar", _config);
+            var sut = new UploadToCoderr(uri, "ada", "cesar", _config);
             sut.UploadFeedback(dto);
 
             _config.FeedbackQueue.Received().Enqueue(Arg.Any<FeedbackDTO>());
@@ -87,7 +87,7 @@ namespace Coderr.Client.NetStd.Tests.Uploaders
             var uri = new Uri("http://localhost");
             _config.UploadFunc = message => throw new InvalidOperationException("err");
 
-            var sut = new UploadTocodeRR(uri, "ada", "cesar", _config);
+            var sut = new UploadToCoderr(uri, "ada", "cesar", _config);
             Action actual = ()=> sut.UploadFeedback(dto);
 
 
@@ -105,7 +105,7 @@ namespace Coderr.Client.NetStd.Tests.Uploaders
                 throw new InvalidOperationException("err");
             };
 
-            var sut = new UploadTocodeRR(uri, "ada", "cesar", _config);
+            var sut = new UploadToCoderr(uri, "ada", "cesar", _config);
             Action actual = () => sut.UploadFeedbackNow(dto);
 
 

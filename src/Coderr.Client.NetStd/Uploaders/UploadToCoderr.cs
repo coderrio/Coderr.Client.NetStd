@@ -6,12 +6,20 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Coderr.Client.Config;
 using Coderr.Client.Contracts;
 using Newtonsoft.Json;
 
 namespace Coderr.Client.Uploaders
 {
-    internal class UploadTocodeRR : IReportUploader
+    /// <summary>
+    ///     Used to upload the report to the Coderr Server.
+    /// </summary>
+    /// <remarks>
+    ///     Will queue reports and try to upload them at a later point if the server is not available (or there are no internet
+    ///     connection).
+    /// </remarks>
+    public class UploadToCoderr : IReportUploader
     {
         private readonly string _apiKey;
         private readonly HttpClient _client = new HttpClient();
@@ -20,11 +28,11 @@ namespace Coderr.Client.Uploaders
         private readonly IUploadQueue<ErrorReportDTO> _reportQueue;
         private readonly Uri _reportUri, _feedbackUri;
         private readonly string _sharedSecret;
-        private readonly Func<HttpRequestMessage, Task<HttpResponseMessage>> _uploadFunc;
         private readonly Func<bool> _throwExceptionsAccessor;
+        private readonly Func<HttpRequestMessage, Task<HttpResponseMessage>> _uploadFunc;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="UploadTocodeRR" /> class.
+        ///     Initializes a new instance of the <see cref="UploadToCoderr" /> class.
         /// </summary>
         /// <param name="oneTrueHost">
         ///     Uri to the root of the codeRR web. Example.
@@ -33,7 +41,7 @@ namespace Coderr.Client.Uploaders
         /// <param name="apiKey">The API key.</param>
         /// <param name="sharedSecret">The shared secret.</param>
         /// <exception cref="System.ArgumentNullException">apiKey</exception>
-        public UploadTocodeRR(Uri oneTrueHost, string apiKey, string sharedSecret)
+        public UploadToCoderr(Uri oneTrueHost, string apiKey, string sharedSecret)
         {
             if (string.IsNullOrEmpty(apiKey)) throw new ArgumentNullException("apiKey");
             if (string.IsNullOrEmpty(sharedSecret)) throw new ArgumentNullException("sharedSecret");
@@ -42,8 +50,10 @@ namespace Coderr.Client.Uploaders
                 oneTrueHost = new Uri(oneTrueHost + "/");
 
             if (oneTrueHost.AbsolutePath.Contains("/receiver/"))
+            {
                 throw new ArgumentException(
                     "The codeRR URI should not contain the reporting area '/receiver/', but should point at the site root.");
+            }
 
             _reportUri = new Uri(oneTrueHost, "receiver/report/" + apiKey + "/");
             _feedbackUri = new Uri(oneTrueHost, "receiver/report/" + apiKey + "/feedback/");
@@ -62,7 +72,7 @@ namespace Coderr.Client.Uploaders
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="UploadTocodeRR" /> class.
+        ///     Initializes a new instance of the <see cref="UploadToCoderr" /> class.
         /// </summary>
         /// <param name="oneTrueHost">
         ///     Uri to the root of the codeRR web. Example.
@@ -72,7 +82,7 @@ namespace Coderr.Client.Uploaders
         /// <param name="sharedSecret">The shared secret.</param>
         /// <param name="config">parameters for tests</param>
         /// <exception cref="System.ArgumentNullException">apiKey</exception>
-        internal UploadTocodeRR(Uri oneTrueHost, string apiKey, string sharedSecret, TestConfig config)
+        internal UploadToCoderr(Uri oneTrueHost, string apiKey, string sharedSecret, TestConfig config)
             : this(oneTrueHost, apiKey, sharedSecret)
         {
             _queueReportsAccessor = config.QueueReportsAccessor;
@@ -82,8 +92,20 @@ namespace Coderr.Client.Uploaders
             _reportQueue = config.ReportQueue;
         }
 
+        /// <summary>
+        ///     We've tried several times and failed to upload the report.
+        /// </summary>
         public event EventHandler<UploadReportFailedEventArgs> UploadFailed;
 
+        /// <summary>
+        ///     Upload feedback to Coderr.
+        /// </summary>
+        /// <param name="feedback">feedback to upload</param>
+        /// <remarks>
+        ///     <para>
+        ///         Will either upload directly or queue if the <see cref="CoderrConfiguration.QueueReports" /> is true
+        ///     </para>
+        /// </remarks>
         public void UploadFeedback(FeedbackDTO feedback)
         {
             if (_queueReportsAccessor())
@@ -92,6 +114,15 @@ namespace Coderr.Client.Uploaders
                 UploadFeedbackNow(feedback);
         }
 
+        /// <summary>
+        ///     Upload report
+        /// </summary>
+        /// <param name="report">Report DTO</param>
+        /// <remarks>
+        ///     <para>
+        ///         Will either upload directly or queue if the <see cref="CoderrConfiguration.QueueReports" /> is true
+        ///     </para>
+        /// </remarks>
         public void UploadReport(ErrorReportDTO report)
         {
             if (_queueReportsAccessor())
@@ -119,9 +150,10 @@ namespace Coderr.Client.Uploaders
                 gzip.Write(jsonBytes, 0, jsonBytes.Length);
                 gzip.Flush();
             }
+
             var requestBody = ms.ToArray();
 
-            
+
             byte[] hash;
             var hashAlgo = new HMACSHA256(Encoding.UTF8.GetBytes(_sharedSecret));
             hash = hashAlgo.ComputeHash(requestBody, 0, requestBody.Length);
@@ -135,7 +167,14 @@ namespace Coderr.Client.Uploaders
             //content.Headers.ContentEncoding.Add("gzip");
 
             uri = uri + "?sig=" + signature + "&v=1&throw=" + (Err.Configuration.ThrowExceptions ? "1" : "0");
-            return new HttpRequestMessage(HttpMethod.Post, uri) { Content = content };
+            return new HttpRequestMessage(HttpMethod.Post, uri) {Content = content};
+        }
+
+        internal void UploadFeedbackNow(FeedbackDTO dto)
+        {
+            PostData(_feedbackUri.ToString(), dto)
+                .GetAwaiter()
+                .GetResult();
         }
 
         private void OnUploadFailed(object sender, UploadReportFailedEventArgs e)
@@ -181,13 +220,6 @@ namespace Coderr.Client.Uploaders
                         throw new InvalidApplicationKeyException($"{response.StatusCode}: {title}\r\n{description}");
                     throw new InvalidOperationException($"{response.StatusCode}: {title}\r\n{description}");
             }
-        }
-
-        internal void UploadFeedbackNow(FeedbackDTO dto)
-        {
-            PostData(_feedbackUri.ToString(), dto)
-                .GetAwaiter()
-                .GetResult();
         }
 
         private void UploadReportNow(ErrorReportDTO dto)

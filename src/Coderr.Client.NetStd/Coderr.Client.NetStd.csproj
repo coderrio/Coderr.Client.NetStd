@@ -6,8 +6,8 @@
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Coderr.Client.NetStd.xml</DocumentationFile>
     <RootNamespace>Coderr.Client</RootNamespace>
 
-    <PackageReleaseNotes>Added support for CorrelationId.</PackageReleaseNotes>
-    <Version>1.2.5</Version>
+    <PackageReleaseNotes>Made the UploadToCoderr class public.</PackageReleaseNotes>
+    <Version>1.2.6</Version>
   </PropertyGroup>
 
   <PropertyGroup>

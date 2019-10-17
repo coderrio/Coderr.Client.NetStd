@@ -6,7 +6,7 @@ namespace Coderr.Client.Uploaders
     /// <summary>
     ///     Defines the contract for all classes that will send the error report to a specific destination.
     /// </summary>
-    /// <seealso cref="UploadTocodeRR" />
+    /// <seealso cref="UploadToCoderr" />
     /// <seealso cref="UploadDispatcher"/>
     /// <remarks>
     ///     <para>

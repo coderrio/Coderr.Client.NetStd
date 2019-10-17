@@ -22,7 +22,7 @@ namespace Coderr.Client.NetStd.Tests.Uploaders
             var apiKey = Guid.NewGuid();
             const string sharedSecret = "SomeSharedSecret";
             var url = new Uri("http://localhost");
-            var reporter = new UploadTocodeRR(url, apiKey.ToString(), sharedSecret);
+            var reporter = new UploadToCoderr(url, apiKey.ToString(), sharedSecret);
             var dto = CreateExceptionDTO();
 
             var e1 = new ErrorReportDTO("dsadasdas", dto,
@@ -79,7 +79,7 @@ namespace Coderr.Client.NetStd.Tests.Uploaders
                 new[] { new ContextCollectionDTO("name1"), new ContextCollectionDTO("name2") });
 
             var url = new Uri("http://localhost:" + port + "/");
-            var sut = new UploadTocodeRR(url, "cramply", "majs");
+            var sut = new UploadToCoderr(url, "cramply", "majs");
             sut.UploadReport(e1);
             _tcs.Task.Wait(1000);
 
@@ -100,7 +100,7 @@ namespace Coderr.Client.NetStd.Tests.Uploaders
             _statusCodeToReturn = "400 APP_KEY";
 
             var url = new Uri("http://localhost:" + port + "/");
-            var sut = new UploadTocodeRR(url, "cramply", "majs");
+            var sut = new UploadToCoderr(url, "cramply", "majs");
             Action e = () => sut.UploadReport(e1);
 
 
