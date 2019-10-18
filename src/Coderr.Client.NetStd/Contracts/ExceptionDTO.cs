@@ -31,6 +31,19 @@ namespace Coderr.Client.Contracts
         /// <summary>
         ///     Initializes a new instance of the <see cref="ExceptionDTO" /> class.
         /// </summary>
+        /// <param name="exception">The exception.</param>
+        /// <exception cref="System.ArgumentNullException">exception</exception>
+        public ExceptionDTO(ExceptionDTO exception)
+        {
+            if (exception == null) throw new ArgumentNullException("exception");
+
+            Copy(exception, this);
+            Properties = new Dictionary<string, string>();
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ExceptionDTO" /> class.
+        /// </summary>
         [JsonConstructor]
         protected ExceptionDTO()
         {
@@ -106,6 +119,32 @@ namespace Coderr.Client.Contracts
             destination.Properties = GetProperties(source);
 
             destination.AsString = source.ToString();
+
+            if (source.InnerException != null)
+                destination.InnerException = new ExceptionDTO(source.InnerException);
+
+            if (destination.StackTrace == null)
+                destination.StackTrace = "";
+        }
+
+        /// <summary>
+        ///     Copy the .NET exception information into our DTO.
+        /// </summary>
+        /// <param name="source">Exception to copy from</param>
+        /// <param name="destination">Model to put the information in.</param>
+        public static void Copy(ExceptionDTO source, ExceptionDTO destination)
+        {
+            destination.FullName = source.FullName;
+            destination.Name = source.Name;
+            destination.Namespace = source.Namespace;
+            destination.AssemblyName = source.AssemblyName;
+            destination.Message = source.Message;
+
+            destination.BaseClasses = source.BaseClasses.ToArray();
+            destination.StackTrace = source.StackTrace;
+            destination.Properties = new Dictionary<string, string>(source.Properties);
+
+            destination.AsString = source.AsString;
 
             if (source.InnerException != null)
                 destination.InnerException = new ExceptionDTO(source.InnerException);
@@ -214,5 +253,6 @@ namespace Coderr.Client.Contracts
             }
             return baseTypes;
         }
+
     }
 }
