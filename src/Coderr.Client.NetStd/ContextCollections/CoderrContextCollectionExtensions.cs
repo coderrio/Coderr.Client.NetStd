@@ -43,6 +43,26 @@ namespace Coderr.Client.ContextCollections
         }
 
         /// <summary>
+        /// Used to navigate through related errors (all related errors must have the same correlation id).
+        /// </summary>
+        public static void AddCorrelationId(this IList<ContextCollectionDTO> collections, string value)
+        {
+            var coderrCollection = GetCoderrCollection(collections);
+            coderrCollection.Properties["CorrelationId"] = value;
+        }
+
+        /// <summary>
+        /// Used to navigate through related errors (all related errors must have the same correlation id).
+        /// </summary>
+        public static void AddCorrelationId(this IErrorReporterContext context, string value)
+        {
+            var coderrCollection = GetCoderrCollection(context.ContextCollections);
+            coderrCollection.Properties["CorrelationId"] = value;
+        }
+
+
+
+        /// <summary>
         ///     Add a tag which can be used in the UI to limit search result.
         /// </summary>
         /// <param name="collections">instance</param>
@@ -61,13 +81,22 @@ namespace Coderr.Client.ContextCollections
         }
 
         /// <summary>
+        ///     Add a tag which can be used in the UI to limit search result.
+        /// </summary>
+        /// <param name="context">instance</param>
+        /// <param name="tagName">tag name</param>
+        public static void AddTag(this IErrorReporterContext context, string tagName)
+        {
+            AddTag(context.ContextCollections, tagName);
+        }
+
+        /// <summary>
         /// Quick facts are shown in the UI in the right panel
         /// </summary>
         /// <param name="collections">instance</param>
         /// <param name="propertyName">property name</param>
         /// <param name="propertyValue">value</param>
-        public static void AddQuickFact(this IList<ContextCollectionDTO> collections, string propertyName,
-            string propertyValue)
+        public static void AddQuickFact(this IList<ContextCollectionDTO> collections, string propertyName, string propertyValue)
         {
             var coderrCollection = GetCoderrCollection(collections);
 
@@ -77,13 +106,23 @@ namespace Coderr.Client.ContextCollections
         }
 
         /// <summary>
+        /// Quick facts are shown in the UI in the right panel
+        /// </summary>
+        /// <param name="context">instance</param>
+        /// <param name="propertyName">property name</param>
+        /// <param name="propertyValue">value</param>
+        public static void AddQuickFact(this IErrorReporterContext context, string propertyName, string propertyValue)
+        {
+            AddQuickFact(context.ContextCollections, propertyName, propertyValue);
+        }
+
+        /// <summary>
         /// Highlighted properties are shown directly before the stack trace.
         /// </summary>
         /// <param name="collections">instance</param>
         /// <param name="contextCollectionName">Name of the context collection that the property is in</param>
         /// <param name="propertyName">Property to display (along with its value)</param>
-        public static void AddHighlightedProperty(this IList<ContextCollectionDTO> collections,
-            string contextCollectionName, string propertyName)
+        public static void AddHighlightedProperty(this IList<ContextCollectionDTO> collections, string contextCollectionName, string propertyName)
         {
             var coderrCollection = GetCoderrCollection(collections);
 
@@ -99,14 +138,23 @@ namespace Coderr.Client.ContextCollections
                 coderrCollection.Properties[CoderrCollectionProperties.HighlightProperties] = $"{values},{value}";
         }
 
+        /// <summary>
+        /// Highlighted properties are shown directly before the stack trace.
+        /// </summary>
+        /// <param name="context">instance</param>
+        /// <param name="contextCollectionName">Name of the context collection that the property is in</param>
+        /// <param name="propertyName">Property to display (along with its value)</param>
+        public static void AddHighlightedProperty(this IErrorReporterContext context, string contextCollectionName, string propertyName)
+        {
+            AddHighlightedProperty(context.ContextCollections, contextCollectionName, propertyName);
+        }
 
         /// <summary>
-        /// Highlighted collections are shown directly before the stack trace in the UI.
+        /// The first highlighted collection are selected per default in the context collection navigator.
         /// </summary>
         /// <param name="collections">instance</param>
         /// <param name="contextCollectionName">Name of the context collection that we should show all properties and their values from.</param>
-        public static void AddHighlightedCollection(this IList<ContextCollectionDTO> collections,
-            string contextCollectionName)
+        public static void AddHighlightedCollection(this IList<ContextCollectionDTO> collections, string contextCollectionName)
         {
             var coderrCollection = GetCoderrCollection(collections);
 
@@ -123,29 +171,7 @@ namespace Coderr.Client.ContextCollections
         }
 
         /// <summary>
-        ///     Add a tag which can be used in the UI to limit search result.
-        /// </summary>
-        /// <param name="context">instance</param>
-        /// <param name="tagName">tag name</param>
-        public static void AddTag(this IErrorReporterContext context, string tagName)
-        {
-            AddTag(context.ContextCollections, tagName);
-        }
-
-        /// <summary>
-        /// Highlighted properties are shown directly before the stack trace.
-        /// </summary>
-        /// <param name="context">instance</param>
-        /// <param name="contextCollectionName">Name of the context collection that the property is in</param>
-        /// <param name="propertyName">Property to display (along with its value)</param>
-        public static void AddHighlightedProperty(this IErrorReporterContext context, string contextCollectionName,
-            string propertyName)
-        {
-            AddHighlightedProperty(context.ContextCollections, contextCollectionName, propertyName);
-        }
-
-        /// <summary>
-        /// Highlighted collections are shown directly before the stack trace in the UI.
+        /// The first highlighted collection are selected per default in the context collection navigator.
         /// </summary>
         /// <param name="context">instance</param>
         /// <param name="contextCollectionName">Name of the context collection that we should show all properties and their values from.</param>
@@ -154,15 +180,9 @@ namespace Coderr.Client.ContextCollections
             AddHighlightedCollection(context.ContextCollections, contextCollectionName);
         }
 
-        /// <summary>
-        /// Quick facts are shown in the UI in the right panel
-        /// </summary>
-        /// <param name="context">instance</param>
-        /// <param name="propertyName">property name</param>
-        /// <param name="propertyValue">value</param>
-        public static void AddQuickFact(this IErrorReporterContext context, string propertyName, string propertyValue)
-        {
-            AddQuickFact(context.ContextCollections, propertyName, propertyValue);
-        }
+
+
+
+
     }
 }

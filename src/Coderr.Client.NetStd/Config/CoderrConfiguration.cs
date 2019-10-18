@@ -213,7 +213,7 @@ namespace Coderr.Client.Config
             }
                 
 
-            Uploaders.Register(new UploadTocodeRR(oneTrueHost, appKey, sharedSecret));
+            Uploaders.Register(new UploadToCoderr(oneTrueHost, appKey, sharedSecret));
         }
 
         /// <summary>

@@ -35,7 +35,7 @@ namespace Coderr.Client.NetStd.Tests.Config
             var sut = new CoderrConfiguration(dispatcher);
             sut.Credentials(new Uri("http://localhost"), "ada", "buffen");
 
-            dispatcher.Received().Register(Arg.Any<UploadTocodeRR>());
+            dispatcher.Received().Register(Arg.Any<UploadToCoderr>());
         }
     }
 }
