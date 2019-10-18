@@ -6,8 +6,8 @@
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Coderr.Client.NetStd.xml</DocumentationFile>
     <RootNamespace>Coderr.Client</RootNamespace>
 
-    <PackageReleaseNotes>Added copy constructor to ExceptionDTO.</PackageReleaseNotes>
-    <Version>1.2.7</Version>
+    <PackageReleaseNotes>The ExceptionProcessor used the global configuration object instead of the injected one.</PackageReleaseNotes>
+    <Version>1.2.8</Version>
   </PropertyGroup>
 
   <PropertyGroup>

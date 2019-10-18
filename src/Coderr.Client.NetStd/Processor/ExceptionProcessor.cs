@@ -106,7 +106,7 @@ namespace Coderr.Client.Processor
             var report = new ErrorReportDTO(reportId, new ExceptionDTO(context.Exception),
                 context.ContextCollections.ToArray())
             {
-                EnvironmentName = Err.Configuration.EnvironmentName
+                EnvironmentName = _configuration.EnvironmentName
             };
             return report;
         }
@@ -244,7 +244,7 @@ namespace Coderr.Client.Processor
 
         private void InvokePreProcessor(IErrorReporterContext context)
         {
-            Err.Configuration.ExceptionPreProcessor?.Invoke(context);
+            _configuration.ExceptionPreProcessor?.Invoke(context);
         }
 
         private bool IsReported(Exception exception)
