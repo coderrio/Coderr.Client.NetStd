@@ -30,6 +30,7 @@ namespace Coderr.Client.Uploaders
         private readonly string _sharedSecret;
         private readonly Func<bool> _throwExceptionsAccessor;
         private readonly Func<HttpRequestMessage, Task<HttpResponseMessage>> _uploadFunc;
+        private bool _signReport = true;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="UploadToCoderr" /> class.
@@ -153,20 +154,25 @@ namespace Coderr.Client.Uploaders
 
             var requestBody = ms.ToArray();
 
-
-            byte[] hash;
-            var hashAlgo = new HMACSHA256(Encoding.UTF8.GetBytes(_sharedSecret));
-            hash = hashAlgo.ComputeHash(requestBody, 0, requestBody.Length);
-
-            var signature = Convert.ToBase64String(hash);
             var content = new ByteArrayContent(requestBody);
+            if (_signReport)
+            {
+                var hashAlgo = new HMACSHA256(Encoding.UTF8.GetBytes(_sharedSecret));
+                var hash = hashAlgo.ComputeHash(requestBody, 0, requestBody.Length);
+                var signature = Convert.ToBase64String(hash);
 
-            // this is version 2. Need to push that on the server side first
-            // and we also need to calc the signature on the JSON and not the gzipped content
-            //content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            //content.Headers.ContentEncoding.Add("gzip");
+                // this is version 2. Need to push that on the server side first
+                // and we also need to calc the signature on the JSON and not the gzipped content
+                //content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                //content.Headers.ContentEncoding.Add("gzip");
 
-            uri = uri + "?sig=" + signature + "&v=1&throw=" + (Err.Configuration.ThrowExceptions ? "1" : "0");
+                uri = uri + "?sig=" + signature + "&v=1&throw=" + (Err.Configuration.ThrowExceptions ? "1" : "0");
+            }
+            else
+            {
+                uri = uri + "?v=1&throw=" + (Err.Configuration.ThrowExceptions ? "1" : "0");
+            }
+
             return new HttpRequestMessage(HttpMethod.Post, uri) {Content = content};
         }
 

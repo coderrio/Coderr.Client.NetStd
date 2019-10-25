@@ -6,8 +6,8 @@
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Coderr.Client.NetStd.xml</DocumentationFile>
     <RootNamespace>Coderr.Client</RootNamespace>
 
-    <PackageReleaseNotes>The ExceptionProcessor used the global configuration object instead of the injected one.</PackageReleaseNotes>
-    <Version>1.2.8</Version>
+    <PackageReleaseNotes>A private setter for signature generation to be able to test backend for javascript apps.</PackageReleaseNotes>
+    <Version>1.2.9</Version>
   </PropertyGroup>
 
   <PropertyGroup>
