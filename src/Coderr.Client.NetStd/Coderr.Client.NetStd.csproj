@@ -6,8 +6,8 @@
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Coderr.Client.NetStd.xml</DocumentationFile>
     <RootNamespace>Coderr.Client</RootNamespace>
 
-    <PackageReleaseNotes>Added CollectionBuilder.CreateTokenForCredentials which builds a tokenized identity which cannot be used to identify the user.</PackageReleaseNotes>
-    <Version>1.2.10</Version>
+    <PackageReleaseNotes>Switched to MurmurHash2 for user identity hashing.</PackageReleaseNotes>
+    <Version>1.2.11</Version>
   </PropertyGroup>
 
   <PropertyGroup>
