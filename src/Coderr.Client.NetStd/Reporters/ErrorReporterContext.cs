@@ -30,7 +30,7 @@ namespace Coderr.Client.Reporters
         }
 
         /// <inheritdoc />
-        public LogEntry[] LogEntries { get; set; }
+        public LogEntryDto[] LogEntries { get; set; }
 
         /// <inheritdoc />
         public IList<ContextCollectionDTO> ContextCollections { get; }

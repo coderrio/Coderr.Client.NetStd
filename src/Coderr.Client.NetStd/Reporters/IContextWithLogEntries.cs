@@ -10,6 +10,6 @@ namespace Coderr.Client.Reporters
         /// <summary>
         /// 100 last log entries (if specified, otherwise null)
         /// </summary>
-        LogEntry[] LogEntries { get; set; }
+        LogEntryDto[] LogEntries { get; set; }
     }
 }

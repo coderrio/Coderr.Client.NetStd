@@ -82,7 +82,7 @@ namespace Coderr.Client.NetStd.Tests.Processor
             var ex = new Exception("hello");
             var context = new ErrorReporterContext(this, ex)
             {
-                LogEntries = new LogEntry[] { new LogEntry(DateTime.UtcNow, 1, "Hello") }
+                LogEntries = new LogEntryDto[] { new LogEntryDto(DateTime.UtcNow, 1, "Hello") }
             };
 
             var sut = new ExceptionProcessor(config);

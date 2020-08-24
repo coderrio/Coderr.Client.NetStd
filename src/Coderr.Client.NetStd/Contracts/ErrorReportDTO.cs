@@ -91,7 +91,7 @@ namespace Coderr.Client.Contracts
         /// <summary>
         /// The 100 last log entries before the exception was detected (can be null).
         /// </summary>
-        public LogEntry[] LogEntries { get; set; }
+        public LogEntryDto[] LogEntries { get; set; }
 
         /// <summary>
         ///     Add an collection to the model

@@ -6,8 +6,8 @@
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Coderr.Client.NetStd.xml</DocumentationFile>
     <RootNamespace>Coderr.Client</RootNamespace>
 
-    <PackageReleaseNotes>Added support for attaching log to error reports.</PackageReleaseNotes>
-    <Version>1.2.13</Version>
+    <PackageReleaseNotes>Added "Source" to LogEntryDto.</PackageReleaseNotes>
+    <Version>1.2.14</Version>
   </PropertyGroup>
 
   <PropertyGroup>
