@@ -9,11 +9,11 @@ using Xunit;
 
 namespace Coderr.Client.NetStd.Tests.Uploaders
 {
-    public class UploadTocodeRRTests
+    public class UploadToCoderrTests
     {
         private TestConfig _config;
         
-        public UploadTocodeRRTests()
+        public UploadToCoderrTests()
         {
             _config = new TestConfig
             {

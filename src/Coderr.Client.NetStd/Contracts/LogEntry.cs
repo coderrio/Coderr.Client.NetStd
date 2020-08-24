@@ -10,6 +10,18 @@ namespace Coderr.Client.Contracts
     public class LogEntry
     {
         /// <summary>
+        /// Creates a new instance of <see cref="LogEntry"/>.
+        /// </summary>
+        /// <param name="timestampUtc">when</param>
+        /// <param name="logLevel">0 = trace, 1 = debug, 2 = info, 3 = warning, 4 = error, 5 = critical</param>
+        /// <param name="message">message</param>
+        public LogEntry(DateTime timestampUtc, int logLevel, string message)
+        {
+            TimestampUtc = timestampUtc;
+            LogLevel = logLevel;
+            Message = message;
+        }
+        /// <summary>
         /// When this log entry was written
         /// </summary>
         public DateTime TimestampUtc { get; set; }
