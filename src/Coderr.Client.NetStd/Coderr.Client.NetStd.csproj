@@ -6,8 +6,8 @@
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Coderr.Client.NetStd.xml</DocumentationFile>
     <RootNamespace>Coderr.Client</RootNamespace>
 
-    <PackageReleaseNotes>Switched to MurmurHash2 for user identity hashing.</PackageReleaseNotes>
-    <Version>1.2.11</Version>
+    <PackageReleaseNotes>Added support for attaching log to error reports.</PackageReleaseNotes>
+    <Version>1.2.13</Version>
   </PropertyGroup>
 
   <PropertyGroup>

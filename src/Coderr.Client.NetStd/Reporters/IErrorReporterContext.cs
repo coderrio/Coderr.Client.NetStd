@@ -30,5 +30,4 @@ namespace Coderr.Client.Reporters
         /// </remarks>
         object Reporter { get; }
     }
-
 }
