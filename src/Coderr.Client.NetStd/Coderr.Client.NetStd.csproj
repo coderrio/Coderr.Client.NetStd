@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.5;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard1.5;netstandard2.0; net461</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Coderr.Client.NetStd.xml</DocumentationFile>
     <RootNamespace>Coderr.Client</RootNamespace>
 
-    <PackageReleaseNotes>Added "Source" to LogEntryDto.</PackageReleaseNotes>
-    <Version>1.2.14</Version>
+    <PackageReleaseNotes>Added net461 as a framework target.</PackageReleaseNotes>
+    <Version>1.2.15</Version>
   </PropertyGroup>
 
   <PropertyGroup>
