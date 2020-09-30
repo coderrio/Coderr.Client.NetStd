@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using System.Security.Principal;
-using System.Text;
+using Coderr.Client.ContextCollections.Providers;
 using Coderr.Client.Contracts;
 
 namespace Coderr.Client.ContextCollections
@@ -57,15 +56,7 @@ namespace Coderr.Client.ContextCollections
         {
             if (identity == null) throw new ArgumentNullException(nameof(identity));
 
-            var props = new Dictionary<string, string>();
-            var userDomain = SplitAccountName(identity.Name);
-            if (userDomain.Item1 != null) props.Add("DomainName", userDomain.Item1);
-
-            props.Add("UserName", userDomain.Item2);
-            props.Add("IsAuthenticated", identity.IsAuthenticated ? "true" : "false");
-            props.Add("AuthenticationType", identity.AuthenticationType);
-
-            return new ContextCollectionDTO("UserCredentials", props);
+            return UserCredentials.Create(identity);
         }
 
         /// <summary>
@@ -97,21 +88,7 @@ namespace Coderr.Client.ContextCollections
         {
             if (identity == null) throw new ArgumentNullException(nameof(identity));
 
-            var props = new Dictionary<string, string>();
-
-            var userDomain = SplitAccountName(identity.Name);
-
-            var buffer = Encoding.UTF8.GetBytes(userDomain.Item2);
-            var hash = MD5.Create().ComputeHash(buffer);
-            var md5 = Convert.ToBase64String(hash);
-            props["UserToken"] = md5.TrimEnd('=');
-
-            if (userDomain.Item1 != null)
-                props.Add("DomainName", userDomain.Item1);
-            props.Add("IsAuthenticated", identity.IsAuthenticated ? "true" : "false");
-            props.Add("AuthenticationType", identity.AuthenticationType);
-
-            return new ContextCollectionDTO("UserCredentials", props);
+            return UserCredentials.CreateToken(identity);
         }
 
         /// <summary>
@@ -135,23 +112,5 @@ namespace Coderr.Client.ContextCollections
             return new ContextCollectionDTO("UserSuppliedInformation", props);
         }
 
-        /// <summary>
-        ///     checks if the account name contains a domain name
-        /// </summary>
-        /// <param name="accountName">samAccountName</param>
-        /// <returns>Item 1 = domain (or null), item2 = userName</returns>
-        private static Tuple<string, string> SplitAccountName(string accountName)
-        {
-            if (accountName == null) throw new ArgumentNullException(nameof(accountName));
-
-            var pos = accountName.IndexOf("\\", StringComparison.Ordinal);
-            if (pos == -1)
-                return new Tuple<string, string>(null, accountName);
-
-            var a = accountName.Substring(0, pos);
-            var b = accountName.Substring(pos + 1);
-            return new Tuple<string, string>(a, b);
-
-        }
     }
 }

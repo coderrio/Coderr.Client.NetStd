@@ -54,6 +54,7 @@ namespace Coderr.Client.Contracts
         /// <summary>
         ///     For backwards compatibility
         /// </summary>
+        [Obsolete("Do not use")]
         protected string IncidentId
         {
             get => null;
@@ -86,6 +87,11 @@ namespace Coderr.Client.Contracts
         /// Name of collection to show per default in the UI.
         /// </summary>
         public string HighlightCollection { get; set; }
+
+        /// <summary>
+        /// The 100 last log entries before the exception was detected (can be null).
+        /// </summary>
+        public LogEntryDto[] LogEntries { get; set; }
 
         /// <summary>
         ///     Add an collection to the model

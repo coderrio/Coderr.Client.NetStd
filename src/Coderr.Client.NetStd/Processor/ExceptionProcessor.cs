@@ -106,7 +106,8 @@ namespace Coderr.Client.Processor
             var report = new ErrorReportDTO(reportId, new ExceptionDTO(context.Exception),
                 context.ContextCollections.ToArray())
             {
-                EnvironmentName = _configuration.EnvironmentName
+                EnvironmentName = _configuration.EnvironmentName,
+                LogEntries = (context as IContextWithLogEntries)?.LogEntries
             };
             return report;
         }

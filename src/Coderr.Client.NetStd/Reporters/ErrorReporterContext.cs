@@ -12,7 +12,7 @@ namespace Coderr.Client.Reporters
     ///     Used to be able to provide app specific context information (for instance HTTP apps can provide the HTTP
     ///     context)
     /// </remarks>
-    public class ErrorReporterContext : IErrorReporterContext
+    public class ErrorReporterContext : IErrorReporterContext, IContextWithLogEntries
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ErrorReporterContext" /> class.
@@ -30,13 +30,16 @@ namespace Coderr.Client.Reporters
         }
 
         /// <inheritdoc />
+        public LogEntryDto[] LogEntries { get; set; }
+
+        /// <inheritdoc />
         public IList<ContextCollectionDTO> ContextCollections { get; }
 
         /// <summary>
         ///     Object that discovered the error.
         /// </summary>
         public object Reporter { get; }
-        
+
         /// <summary>
         ///     Gets caught exception
         /// </summary>
@@ -67,14 +70,11 @@ namespace Coderr.Client.Reporters
                     try
                     {
                         var data = JsonConvert.DeserializeObject<IEnumerable<ContextCollectionDTO>>(valueStr);
-                        foreach (var col in data)
-                        {
-                            destination.Add(col);
-                        }
+                        foreach (var col in data) destination.Add(col);
                     }
                     catch (Exception ex)
                     {
-                        var items = new Dictionary<string, string>()
+                        var items = new Dictionary<string, string>
                         {
                             {"MoveCollectionsInException.Err", ex.Message},
                             {"JSON", valueStr}
@@ -82,7 +82,6 @@ namespace Coderr.Client.Reporters
                         var col = new ContextCollectionDTO("ErrCollections", items);
                         destination.Add(col);
                     }
-
                 }
                 else if (keyStr.StartsWith("ErrCollection."))
                 {
@@ -99,7 +98,7 @@ namespace Coderr.Client.Reporters
                     catch (Exception ex)
                     {
                         var pos = keyStr.IndexOf('.');
-                        var items = new Dictionary<string, string>()
+                        var items = new Dictionary<string, string>
                         {
                             {"MoveCollectionsInException.Err", ex.Message},
                             {"JSON", valueStr}
@@ -115,7 +114,6 @@ namespace Coderr.Client.Reporters
 
             if (exception.InnerException != null)
                 MoveCollectionsInException(exception.InnerException, destination);
-
         }
     }
 }
